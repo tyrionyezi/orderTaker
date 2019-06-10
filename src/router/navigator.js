@@ -22,6 +22,7 @@ export default createBottomTabNavigator({
         screen: Game,
         navigationOptions: () => ({
             tabBarLabel: '游戏大厅',
+            title: '游戏大厅',
             tabBarIcon: <Image style={_style.barIcon} source={game} />,
         })
     },
@@ -46,9 +47,9 @@ export default createBottomTabNavigator({
         tabBarPosition: 'bottom',
         tabBarOptions: {
             //当前选中的tab的文本颜色和图标颜色
-            activeTintColor: '#000',
+            activeTintColor: '#0185ef',
             //当前选中tab的背景颜色
-            activeBackgroundColor: "#f5f5f5",
+            // activeBackgroundColor: "#f5f5f5",
             //当前未选中的tab bar的文本颜色和图标颜色
             inactiveTintColor: '#666',
             //当前未选中tab的背景颜色
