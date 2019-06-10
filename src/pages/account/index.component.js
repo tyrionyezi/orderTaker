@@ -19,7 +19,7 @@ export default class Index extends Component {
         let { title } = this.props.navigation.state.params;
         return (
             <View>
-                <Nav title={title}/>
+                <Nav {...this.props} title={title}/>
                 <Text>1231</Text>
             </View>
         )
