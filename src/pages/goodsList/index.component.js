@@ -19,8 +19,8 @@ export default class Index extends Component {
     }
 
     onClick = (title) => {
-        this.props.navigation.push('HelpDoc', {
-            title: title
+        this.props.navigation.push('Accont', {
+            title: '添加账号'
         })
     }
 
@@ -33,7 +33,7 @@ export default class Index extends Component {
                 <Tab/>
                 <View style={_style.accountBox}>
                     <Text>暂无买号</Text>
-                    <TouchableOpacity activeOpacity={0.5} style={_style.btn}>
+                    <TouchableOpacity activeOpacity={0.5} style={_style.btn} onPress={this.onClick}>
                         <Text style={{color:'#fff'}}>添加</Text>
                     </TouchableOpacity>
                 </View>
