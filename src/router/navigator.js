@@ -1,17 +1,16 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
 import { createBottomTabNavigator, createAppContainer, TabBarBottom } from 'react-navigation';
-const home = require('./src/asset/home.png');
-const game = require('./src/asset/game.png');
-const mine = require('./src/asset/mine.png');
-const order = require('./src/asset/order.png');
-import Home from './src/pages/home/index.component';
-import Game from './src/pages/halllobby/index.component';
-import Order from './src/pages/order/index.component';
-import Mine from './src/pages/mine/index.component';
+const home = require('./../asset/home.png');
+const game = require('./../asset/game.png');
+const mine = require('./../asset/mine.png');
+const order = require('./../asset/order.png');
+import Home from './../../src/pages/home/index.component';
+import Game from './../../src/pages/halllobby/index.component';
+import Order from './../../src/pages/order/index.component';
+import Mine from './../../src/pages/mine/index.component';
 
-
-const TabNavigator = createBottomTabNavigator({
+export default createBottomTabNavigator({
     Home: {
         screen: Home,
         navigationOptions: () => ({
