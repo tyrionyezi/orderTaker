@@ -6,7 +6,7 @@ const game = require('./../asset/game.png');
 const mine = require('./../asset/mine.png');
 const order = require('./../asset/order.png');
 import Home from './../../src/pages/home/index.component';
-import Game from './../../src/pages/halllobby/index.component';
+import Game from './../../src/pages/game/index.component';
 import Order from './../../src/pages/order/index.component';
 import Mine from './../../src/pages/mine/index.component';
 

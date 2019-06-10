@@ -1,6 +1,7 @@
 import Login from './../pages/login/index.component';
 import GuideList from './../pages/guideList/index.component';
 import HelpDoc from './../pages/helpDoc/index.component';
+import GoodsList from './../pages/goodsList/index.component';
 export default Routes = {
     Login: {
         screen: Login,
@@ -10,5 +11,8 @@ export default Routes = {
     },
     HelpDoc: {
         screen: HelpDoc
+    },
+    GoodsList: {
+        screen: GoodsList
     }
 }

@@ -11,6 +11,8 @@ import {
     Dimensions,
 } from 'react-native'
 import Nav from './../components/nav/index.component';
+import Tab from './../components/tab/index.component';
+import List from './components/list/index.component';
 export default class Index extends Component {
     constructor(props) {
         super(props)
@@ -23,27 +25,23 @@ export default class Index extends Component {
     }
 
     render() {
-        let  {data = []} = this.props;
+        
         let { title } = this.props.navigation.state.params;
         return (
             <View style={_style.contianer}>
                 <Nav {...this.props} title={title} />
+                <Tab/>
+                <View style={_style.accountBox}>
+                    <Text>暂无买号</Text>
+                    <TouchableOpacity activeOpacity={0.5} style={_style.btn}>
+                        <Text style={{color:'#fff'}}>添加</Text>
+                    </TouchableOpacity>
+                </View>
                 <View style={_style.listBox}>
-                    {
-                        data&&data.map((item,index) => {
-                            return (
-                                <TouchableOpacity key={`t${index}`} activeOpacity={0.5} style={_style.itemBox} onPress={this.onClick.bind(this, title)}>
-                                    <View style={_style.leftBox}>
-                                        <Image style={_style.leftIcon} source={require('./../../asset/plane.png')} />
-                                        <Text>{item.title}</Text>
-                                    </View>
-                                    <View>
-                                        <Image style={_style.rightIcon} source={require('./../../asset/rightArrow.png')} />
-                                    </View>
-                                </TouchableOpacity>
-                            )
-                        })
-                    }
+                    <List/>
+                    <List/>
+                    <List/>
+                    <List/>
                 </View>
             </View>
         )
@@ -53,6 +51,21 @@ export default class Index extends Component {
 const _style = StyleSheet.create({
     contianer: {
         backgroundColor: '#dcd8d84d',
+    },
+    accountBox: {
+        paddingHorizontal: 15,
+        marginTop: 5,
+        height:40,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: '#fff'
+    },
+    btn: {
+        paddingHorizontal:15,
+        paddingVertical: 5,
+        backgroundColor:'#2196F3',
+        borderRadius: 15,
     },
     listBox: {
         paddingHorizontal: 10,
