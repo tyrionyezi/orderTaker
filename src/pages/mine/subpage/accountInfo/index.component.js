@@ -15,7 +15,7 @@ import {
     Alert
 } from 'react-native';
 
-import List from './../../components/list/index.component';
+import List from './../../../components/list/index.component';
 import { accountInfo } from './../../index.data';
 export default class Index extends Component {
     constructor(props) {

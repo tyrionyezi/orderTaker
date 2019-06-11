@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { NoticeBar, Toast, Button } from 'antd-mobile-rn';
 import Header from './components/header/index.component';
-import List from './components/list/index.component';
+import List from './../components/list/index.component';
 import { observer } from 'mobx-react';
 import { listData } from './index.data';
 @observer
