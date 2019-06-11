@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
     Platform,
     StyleSheet,
+    FlatList,
     ImageBackground,
     ScrollView,
     View,
@@ -9,10 +10,12 @@ import {
     Image,
     TouchableOpacity,
     Dimensions,
-} from 'react-native'
+} from 'react-native';
+import { toJS } from 'mobx';
 import Nav from './../components/nav/index.component';
 import Tab from './../components/tab/index.component';
 import List from './components/list/index.component';
+import _state from './index.state';
 export default class Index extends Component {
     constructor(props) {
         super(props)
@@ -24,24 +27,27 @@ export default class Index extends Component {
         })
     }
 
+    componentDidMount() {
+        _state.getOrderList();
+    }
+
     render() {
-        
-        let { title } = this.props.navigation.state.params;
         return (
             <View style={_style.contianer}>
-                <Nav {...this.props} title={title} />
-                <Tab/>
+                <Tab />
                 <View style={_style.accountBox}>
                     <Text>暂无买号</Text>
                     <TouchableOpacity activeOpacity={0.5} style={_style.btn} onPress={this.onClick}>
-                        <Text style={{color:'#fff'}}>添加</Text>
+                        <Text style={{ color: '#fff' }}>添加</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={_style.listBox}>
-                    <List/>
-                    <List/>
-                    <List/>
-                    <List/>
+                    <FlatList
+                        keyExtractor={(item, index) => `f${index}`}
+                        data={toJS(_state.dataList)}
+                        renderItem={(item) => <List obj={item} />}
+                    >
+                    </FlatList>
                 </View>
             </View>
         )
@@ -55,16 +61,16 @@ const _style = StyleSheet.create({
     accountBox: {
         paddingHorizontal: 15,
         marginTop: 5,
-        height:40,
+        height: 40,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#fff'
     },
     btn: {
-        paddingHorizontal:15,
+        paddingHorizontal: 15,
         paddingVertical: 5,
-        backgroundColor:'#2196F3',
+        backgroundColor: '#2196F3',
         borderRadius: 15,
     },
     listBox: {

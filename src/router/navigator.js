@@ -30,6 +30,7 @@ export default createBottomTabNavigator({
         screen: Order,
         navigationOptions: () => ({
             tabBarLabel: '订单',
+            title: '订单',
             tabBarIcon: <Image style={_style.barIcon} source={order} />,
         })
     },

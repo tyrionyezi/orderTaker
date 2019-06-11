@@ -1,34 +1,50 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
     Platform,
     StyleSheet,
     ImageBackground,
-    FlatList,
+    ScrollView,
     View,
     Text,
-    Image,
     TouchableOpacity,
-    AsyncStorage,
     Dimensions,
-    NativeModules,
-    DeviceEventEmitter,
-    Alert
-} from 'react-native'
-import { NoticeBar, Toast, Button } from 'antd-mobile-rn';
-import { observer } from 'mobx-react';
-
-
-@observer
-export default class Order extends Component {
+} from 'react-native';
+const { height, width } = Dimensions.get('window');
+import Card from './../components/card/index.component';
+import { card1Data, card2Data } from './index.data';
+export default class Index extends Component {
     constructor(props) {
         super(props)
     }
 
     render() {
         return (
-            <View>
-                <Text>OrderOrderOrderOrder</Text>
+            <View style={_style.container}>
+                <View style={_style.navBox}>
+                    <Text style={_style.titleTxt}>
+                        订单
+                   </Text>
+                </View>
+                <Card {...this.props} title={'已接浏览任务'} data={card1Data} />
+                <Card {...this.props} title={'已接垫付任务'} data={card2Data} />
             </View>
         )
     }
 }
+
+const _style = StyleSheet.create({
+    container: {
+        paddingTop: 30,
+        backgroundColor: '#dcd8d84d',
+    },
+    navBox: {
+        height: 50,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    titleTxt: {
+        fontSize: 18,
+        fontWeight: '500'
+    }
+})

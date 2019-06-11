@@ -28,16 +28,16 @@ const routerStack = createStackNavigator({
         // 指定标头的呈现方式
         headerMode: "screen",
         //显示返回图标后的文字
-        headerBackTitleVisible: false,
-        cardOverlayEnabled: true,
+        headerBackTitleVisible: true,
+        cardOverlayEnabled: false,
         //标题居中
         headerLayoutPreset: "center",
         //设置默认数据
-        defaultNavigationOptions: ({ navigation }) => {
-            return {
-                // 设置头部返回图片
-                headerBackImage: <Image style={{ width: 8, height: 16 }} screen={require('./../asset/back.png')} />
-            }
+        defaultNavigationOptions: {
+            headerBackTitle: null,
+            headerTintColor: '#151010',
+            headerBackAllowFontScaling: true,
+            headerBackImage: <Image style={{ width: 15, height: 25, marginLeft: 15 }} source={require('./../asset/back.png')} />
         },
         //页面跳转动画
         transitionConfig: () => ({

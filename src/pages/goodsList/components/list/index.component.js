@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     Platform,
     StyleSheet,
@@ -24,27 +24,29 @@ export default class List extends Component {
         selectIndex: 0
     }
 
-    onClick = (item,index) => {
-        this.setState({selectIndex: index});
-        if(!!this.props.onClick) {
-            this.props.onClick(item,index)
+    onClick = (item, index) => {
+        this.setState({ selectIndex: index });
+        if (!!this.props.onClick) {
+            this.props.onClick(item, index)
         }
     }
 
     render() {
+        let { obj = {} } = this.props;
+        let { item = {} } = obj;
         return (
             <View style={_style.itemBox}>
                 <View style={_style.titleBox}>
-                    <Text style={{color: '#8a8484',}}>常规游戏：131312313</Text>
+                    <Text style={{ color: '#8a8484', }}>{`常规游戏：${item.serial}`}</Text>
                 </View>
                 <View style={_style.contentBox}>
-                   <View style={_style.leftBox}>
-                       {/* <Text style={_style.labelTxt}>¥</Text> */}
-                       <Image style={_style.rmbIcon} source={require('./../../../../asset/¥.png')}/>
-                       <Text style={_style.valueTxt}>0.36</Text>
-                   </View>
-                   <TouchableOpacity style={_style.btnBox}>
-                       <Text style={_style.btnTxt}>立即领取</Text>
+                    <View style={_style.leftBox}>
+                        {/* <Text style={_style.labelTxt}>¥</Text> */}
+                        <Image style={_style.rmbIcon} source={require('./../../../../asset/¥.png')} />
+                        <Text style={_style.valueTxt}>{item.charge}</Text>
+                    </View>
+                    <TouchableOpacity style={_style.btnBox}>
+                        <Text style={_style.btnTxt}>立即领取</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -56,18 +58,18 @@ const _style = StyleSheet.create({
     itemBox: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        height:100,
-        borderWidth:0,
+        height: 100,
+        borderWidth: 0,
         borderBottomWidth: 1,
         borderBottomColor: '#c3c0c08c',
     },
     titleBox: {
-        height:30,
+        height: 30,
         flexDirection: 'row',
         alignItems: 'center',
     },
     contentBox: {
-        height:70,
+        height: 70,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -91,11 +93,11 @@ const _style = StyleSheet.create({
         color: '#f3be1e',
         fontSize: 25,
         lineHeight: 30,
-        fontWeight:  '600',
+        fontWeight: '600',
         marginLeft: 30,
     },
     rmbIcon: {
-        width:25,
-        height:25,
+        width: 25,
+        height: 25,
     }
 })

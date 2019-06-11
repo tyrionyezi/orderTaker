@@ -10,7 +10,6 @@ import {
     TouchableOpacity,
     Dimensions,
 } from 'react-native'
-import Nav from './../components/nav/index.component';
 export default class Index extends Component {
     constructor(props) {
         super(props)
@@ -23,14 +22,12 @@ export default class Index extends Component {
     }
 
     render() {
-        let  {data = []} = this.props;
-        let { title } = this.props.navigation.state.params;
+        let { data = [] } = this.props;
         return (
             <View style={_style.contianer}>
-                <Nav {...this.props} title={title} />
                 <View style={_style.listBox}>
                     {
-                        data&&data.map((item,index) => {
+                        data && data.map((item, index) => {
                             return (
                                 <TouchableOpacity key={`t${index}`} activeOpacity={0.5} style={_style.itemBox} onPress={this.onClick.bind(this, title)}>
                                     <View style={_style.leftBox}>
