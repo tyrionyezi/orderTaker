@@ -22,7 +22,9 @@ export default class Nav extends Component {
     }
 
     back = () => {
-        this.props.navigation.pop();
+        if(!!this.props.onClick) {
+            this.props.onClick()
+        }
     }
 
     render() {
@@ -30,7 +32,7 @@ export default class Nav extends Component {
         return (
             <View style={_style.navBox}>
                 <TouchableOpacity activeOpacity={0.5} style={_style.left} onPress={this.back}>
-                    <Image style={_style.backIcon} source={require('./../../../asset/back.png')}></Image>
+                    <Image style={_style.backIcon} source={require('./../../../../asset/back.png')}></Image>
                 </TouchableOpacity>
                 <View style={_style.center}>
                     <Text style={_style.titleTxt}>{title}</Text>

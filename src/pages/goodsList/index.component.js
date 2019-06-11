@@ -11,44 +11,94 @@ import {
     TouchableOpacity,
     Dimensions,
 } from 'react-native';
+import { Modal } from 'antd-mobile-rn';
 import { toJS } from 'mobx';
+import { observer } from 'mobx-react';
 import Nav from './../components/nav/index.component';
 import Tab from './../components/tab/index.component';
+import ListItem from './components/listItem/index.component';
 import List from './components/list/index.component';
 import _state from './index.state';
+import { tabData } from './index.data';
+
+@observer
 export default class Index extends Component {
     constructor(props) {
         super(props)
     }
+    state = {
+        visible: false,
+    }
 
     onClick = (title) => {
         this.props.navigation.push('Accont', {
-            title: '添加账号'
+            title: '添加账号',
+            platform: _state.tabIndex,
         })
     }
 
+    setAccountSort = () => {
+        this.setState({visible: true})
+        // this.props.navigation.push('setAccount', {
+        //     title: '添加账号',
+        // })
+    }
+    closeModal  = (item) => {
+        console.log(item)
+        this.setState({visible: false})
+    }
+
     componentDidMount() {
+        let wrap_type = this.props.navigation.getParam('type')
+        _state.initParams(wrap_type);
         _state.getOrderList();
+        _state.getAccountList();
     }
 
     render() {
+        let cunrrentAcconutData = toJS(_state.allPlatformSet)[_state.tabIndex];
         return (
             <View style={_style.contianer}>
-                <Tab />
-                <View style={_style.accountBox}>
-                    <Text>暂无买号</Text>
-                    <TouchableOpacity activeOpacity={0.5} style={_style.btn} onPress={this.onClick}>
-                        <Text style={{ color: '#fff' }}>添加</Text>
+                <Tab data={tabData} onClick={_state.tabChange}/>
+                {
+                    cunrrentAcconutData.length > 0 ?
+                    <TouchableOpacity 
+                        style={_style.accountBox}
+                        activeOpacity={0.5}
+                        onPress={this.setAccountSort}
+                    >
+                        <Text>{cunrrentAcconutData[0].name}</Text>
+                            <Image style={_style.rightIcon} source={require('./../../asset/rightArrow.png')}/>
                     </TouchableOpacity>
-                </View>
+                    :
+                    <View style={_style.accountBox}>
+                        <Text>暂无买号</Text>
+                        <TouchableOpacity activeOpacity={0.5} style={_style.btn} onPress={this.onClick}>
+                            <Text style={{ color: '#fff' }}>添加</Text>
+                        </TouchableOpacity>
+                    </View>
+                }
                 <View style={_style.listBox}>
                     <FlatList
                         keyExtractor={(item, index) => `f${index}`}
                         data={toJS(_state.dataList)}
-                        renderItem={(item) => <List obj={item} />}
+                        renderItem={(item) => <ListItem obj={item} onClick={_state.receiveOrder} />}
                     >
                     </FlatList>
                 </View>
+                <Modal
+                    popup={true}
+                    visible={this.state.visible}
+                    animationType="slide-up"
+                    maskClosable={true}
+                    style={_style.modalSty}
+                    onClose={this.closeModal}
+                    >
+                    <List
+                        onClick={this.closeModal}
+                        data={cunrrentAcconutData}
+                    />
+                </Modal>
             </View>
         )
     }
@@ -100,5 +150,9 @@ const _style = StyleSheet.create({
     rightIcon: {
         width: 8,
         height: 16
+    },
+    modalSty: {
+        height:300,
+        paddingVertical:15,
     }
 })

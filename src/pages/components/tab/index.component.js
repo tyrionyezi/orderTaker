@@ -31,18 +31,7 @@ export default class Tab extends Component {
     }
 
     render() {
-        const data =[
-            {
-                name: '淘宝/天猫',
-                value: '0',
-            },{
-                name: '京东',
-                value: '1',
-            },{
-                name: '拼多多',
-                value: '2',
-            },
-        ]
+        let { data = []} = this.props;
         let {selectIndex} = this.state;
         return (
             <View style={_style.tabBox}>

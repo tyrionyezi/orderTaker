@@ -20,15 +20,16 @@ export default class Card extends Component {
         super(props)
     }
 
-    onClick = (item, index) => {
+    onClick = (item, index,type) => {
         this.props.navigation.push(item.path, {
-            title: item.title
+            title: item.title,
+            type: type
         })
     }
 
 
     render() {
-        let { title = '', data = []} = this.props;
+        let { title = '', type='1', data = []} = this.props;
         console.log(title, data, 'datadatadata')
         return (
             <View style={_style.cardBox}>
@@ -43,7 +44,7 @@ export default class Card extends Component {
                 {
                     data&&data.map((item, index) => {
                         return (
-                            <TouchableOpacity key={`cd${index}`} style={_style.itemCard} onPress={this.onClick.bind(this,item,index)}>
+                            <TouchableOpacity key={`cd${index}`} style={_style.itemCard} onPress={this.onClick.bind(this,item,index,type)}>
                                 <Image style={_style.itemIcon} source={item.icon}/>
                                 <Text style={_style.subTitleTxt}>{item.title}</Text>
                             </TouchableOpacity>

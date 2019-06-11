@@ -12,81 +12,68 @@ import {
     Dimensions,
 } from 'react-native';
 import { List, Picker, DatePicker, InputItem } from 'antd-mobile-rn';
+import { observer } from 'mobx-react';
 const { height, width } = Dimensions.get('window');
-import data from './index.data'
+import _state from './index.state';
+import data from './index.data';
+
+@observer
 export default class Index extends Component {
     constructor(props) {
         super(props)
     }
-    // state = {
-    //     userName: '',
-    // }
-    state = {
-        userName: '',
-        data: [],
-        value: [],
-        pickerValue: [],
+    componentDidMount () {
+        let rootInfo = this.props.navigation.state.params;
+        _state.initParams(rootInfo)
     }
-    onPress = () => {
-        setTimeout(() => {
-            this.setState({
-                data: [],
-            });
-        }, 500);
-    };
-    onChange = (value, index, data) => {
-        console.log(value, index, data, 'valuevalue')
-        this.setState({ value });
-    };
+
     render() {
-        let { title } = this.props.navigation.state.params;
         return (
             <View style={_style.container}>
                 <View style={_style.formBox}>
                     <List>
                         <InputItem
                             clear
-                            value={this.state.value}
-                            onChange={userName => {
-                                this.setState({
-                                    value,
-                                });
+                            value={_state.addFileds.name}
+                            onChange={name => {
+                                _state.setAddFiledsValue('name',name)
                             }}
                             placeholder="请输入"
                         >
-                            账号
+                            平台账号
                         </InputItem>
                         <Picker
                             data={[
-                                { label: '男', value: '0' },
-                                { label: '女', value: '1' }
+                                { label: '男', value: '1' },
+                                { label: '女', value: '2' }
                             ]}
                             cols={1}
-                            value={this.state.value}
-                            onChange={this.onChange}
+                            value={_state.addFileds.sex}
+                            onOk={(sex) => _state.setAddFiledsValue('sex',sex)}
                         >
                             <List.Item arrow="horizontal" style={_style.label}>性别</List.Item>
                         </Picker>
                         <DatePicker
-                            value={''}
+                            value={_state.addFileds.Ymd}
                             mode="date"
                             minDate={new Date(1980, 1, 1)}
                             maxDate={new Date(2026, 11, 3)}
-                            onChange={(data) => {
-                                this.setState({ birthDay: data })
-                            }}
+                            onOk={(Ymd) => _state.setAddFiledsValue('Ymd',Ymd)}
                             format="YYYY-MM-DD"
                         >
                             <List.Item arrow="horizontal" style={_style.label}>生日</List.Item>
                         </DatePicker>
-                        <Picker
+                        {/* <Picker
                             data={[
-                                { label: '男', value: '0' },
-                                { label: '女', value: '1' }
+                                { label: '☆', value: '1' },
+                                { label: '☆☆', value: '2' },
+                                { label: '☆☆☆', value: '3' },
+                                { label: '☆☆☆☆', value: '4' },
+                                { label: '☆☆☆☆☆', value: '5' },
                             ]}
                             cols={1}
-                            value={this.state.value}
-                            onChange={this.onChange}
+                            value={_state.addFileds.credit}
+                            onOk={(credit) => _state.setAddFiledsValue('credit',credit)}
                         >
                             <List.Item arrow="horizontal" style={_style.label}>信用等级</List.Item>
                         </Picker>
@@ -96,43 +83,31 @@ export default class Index extends Component {
                                 { label: '女', value: '1' }
                             ]}
                             cols={1}
-                            value={this.state.value}
-                            onChange={this.onChange}
+                            value={_state.addFileds.tag}
+                            onOk={(tag) => _state.setAddFiledsValue('tag',tag)}
                         >
                             <List.Item arrow="horizontal" style={_style.label}>购物标签</List.Item>
-                        </Picker>
+                        </Picker> */}
                         <InputItem
                             clear
-                            value={this.state.value}
-                            onChange={value => {
-                                this.setState({
-                                    value,
-                                });
-                            }}
+                            value={_state.addFileds.serial}
+                            onChange={(serial) => _state.setAddFiledsValue('serial',serial)}
                             placeholder="请输入"
                         >
                             订单编号
                         </InputItem>
                         <InputItem
                             clear
-                            value={this.state.value}
-                            onChange={value => {
-                                this.setState({
-                                    value,
-                                });
-                            }}
+                            value={_state.addFileds.receiver_name}
+                            onChange={(receiver_name) => _state.setAddFiledsValue('receiver_name',receiver_name)}
                             placeholder="请输入"
                         >
                             收件人
                         </InputItem>
                         <InputItem
                             clear
-                            value={this.state.value}
-                            onChange={value => {
-                                this.setState({
-                                    value,
-                                });
-                            }}
+                            value={_state.addFileds.recevier_tel}
+                            onChange={(recevier_tel) => _state.setAddFiledsValue('recevier_tel',recevier_tel)}
                             placeholder="请输入"
                         >
                             电话
@@ -140,19 +115,15 @@ export default class Index extends Component {
                         <Picker
                             data={data}
                             cols={3}
-                            value={this.state.value}
-                            onChange={this.onChange}
+                            value={_state.addFileds.address}
+                            onOk={(address) => _state.setAddFiledsValue('address',address)}
                         >
                             <List.Item arrow="horizontal" style={_style.label}>省市选择</List.Item>
                         </Picker>
                         <InputItem
                             clear
-                            value={this.state.value}
-                            onChange={value => {
-                                this.setState({
-                                    value,
-                                });
-                            }}
+                            value={_state.addFileds.street}
+                            onChange={(street) => _state.setAddFiledsValue('street',street)}
                             placeholder="请输入"
                         >
                             街道地址
@@ -162,7 +133,9 @@ export default class Index extends Component {
                 <View style={_style.btnContainer}>
                     <TouchableOpacity
                         style={_style.btnBox}
-                        activeOpacity={0.5}>
+                        activeOpacity={0.5}
+                        onPress={_state.addAccount}
+                        >
                         <Text style={_style.btnTxt}>确认提交</Text>
                     </TouchableOpacity>
                 </View>

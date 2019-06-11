@@ -25,8 +25,8 @@ export default class Index extends Component {
                         游戏大厅
                    </Text>
                 </View>
-                <Card {...this.props} title={'人气游戏'} data={card1Data} />
-                <Card {...this.props} title={'高佣金游戏'} data={card2Data} />
+                <Card {...this.props} title={'人气游戏'} type={1} data={card1Data} />
+                <Card {...this.props} title={'高佣金游戏'} type={0} data={card2Data} />
             </View>
         )
     }

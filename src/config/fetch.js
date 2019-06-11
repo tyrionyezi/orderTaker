@@ -28,6 +28,7 @@ export default class HttpUtils {
             })//返回 服务器处理的结果
                 .then(response => response.json())
                 .then(result => {
+                    console.log(result, 'resultresult')
                     resolve(result);
                 })
                 .catch(error => {

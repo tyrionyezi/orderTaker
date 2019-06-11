@@ -9,6 +9,7 @@ import Authentiacion from './../pages/mine/subpage/authentication/index.componen
 import BankCard from './../pages/mine/subpage/bankCard/index.component';
 import AccountInfo from './../pages/mine/subpage/accountInfo/index.component';
 import UpdatePassword from './../pages/mine/subpage/updatePassoword/index.component';
+import SetAccount from './../pages/goodsList/subPage/setAccount/index.compoent';
 export default Routes = {
     Login: {
         screen: Login,
@@ -26,6 +27,12 @@ export default Routes = {
         screen: GoodsList,
         navigationOptions: ({ navigation }) => ({
             title: navigation.state.params.title,
+        }),
+    },
+    setAccount: {
+        screen: SetAccount,
+        navigationOptions: ({ navigation }) => ({
+            title: '修改账号顺序',
         }),
     },
     Accont: {
