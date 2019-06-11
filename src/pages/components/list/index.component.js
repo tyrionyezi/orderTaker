@@ -50,7 +50,7 @@ export default class List extends Component {
                             <Text>{item.value}</Text>
                             {
                                 item.isTail ?
-                                    <Image style={_style.rightIcon} source={require('./../../../../asset/rightArrow.png')}></Image>
+                                    <Image style={_style.rightIcon} source={require('./../../../asset/rightArrow.png')}></Image>
                                     :
                                     <View />
                             }
