@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     Platform,
     StyleSheet,
@@ -23,27 +23,27 @@ export default class Tab extends Component {
         selectIndex: 0
     }
 
-    onClick = (item,index) => {
-        this.setState({selectIndex: index});
-        if(!!this.props.onClick) {
-            this.props.onClick(item,index)
+    onClick = (item, index) => {
+        this.setState({ selectIndex: index });
+        if (!!this.props.onClick) {
+            this.props.onClick(item, index)
         }
     }
 
     render() {
-        let { data = []} = this.props;
-        let {selectIndex} = this.state;
+        let { data = [] } = this.props;
+        let { selectIndex } = this.state;
         return (
             <View style={_style.tabBox}>
                 {
-                    data&&data.map((item,index) => {
+                    data && data.map((item, index) => {
                         return (
                             <TouchableOpacity
                                 key={`tt${index}`}
                                 activeOpacity={0.5}
-                                onPress={this.onClick.bind(this,item,index)}
-                                style={[_style.itemBox,selectIndex === index ? _style.activeItemBox: {}]}
-                                >
+                                onPress={this.onClick.bind(this, item, index)}
+                                style={[_style.itemBox, selectIndex === index ? _style.activeItemBox : {}]}
+                            >
                                 <Text>{item.name}</Text>
                             </TouchableOpacity>
                         )
@@ -56,7 +56,7 @@ export default class Tab extends Component {
 
 const _style = StyleSheet.create({
     tabBox: {
-        height:50,
+        height: 50,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
@@ -65,12 +65,12 @@ const _style = StyleSheet.create({
     itemBox: {
         flexDirection: 'column',
         justifyContent: 'center',
-        height:50,
-        borderWidth:0,
+        height: 50,
+        borderWidth: 0,
         borderBottomWidth: 2,
         borderBottomColor: '#fff',
     },
     activeItemBox: {
-        borderBottomColor: '#2196F3',
+        borderBottomColor: '#058efb',
     }
 })

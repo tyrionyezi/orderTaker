@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-import { Easing, Animated, Image } from 'react-native';
 import Login from './../pages/login/index.component';
 import GuideList from './../pages/guideList/index.component';
 import HelpDoc from './../pages/helpDoc/index.component';
@@ -10,6 +8,8 @@ import BankCard from './../pages/mine/subpage/bankCard/index.component';
 import AccountInfo from './../pages/mine/subpage/accountInfo/index.component';
 import UpdatePassword from './../pages/mine/subpage/updatePassoword/index.component';
 import SetAccount from './../pages/goodsList/subPage/setAccount/index.compoent';
+import OrderList from './../pages/order/subpage/orderList/index.component';
+import BrowseOrderDetail from './../pages/order/subpage/browseOrderDetail/index.component';
 export default Routes = {
     Login: {
         screen: Login,
@@ -26,7 +26,7 @@ export default Routes = {
     GoodsList: {
         screen: GoodsList,
         navigationOptions: ({ navigation }) => ({
-            title: navigation.state.params.title,
+            title: navigation.state.params.data.title,
         }),
     },
     setAccount: {
@@ -63,6 +63,20 @@ export default Routes = {
         screen: UpdatePassword,
         navigationOptions: ({ navigation }) => ({
             title: '修改密码',
+        }),
+    },
+
+    //订单
+    orderList: {
+        screen: OrderList, //订单列表
+        navigationOptions: ({ navigation }) => ({
+            title: navigation.state.params.data.title,
+        }),
+    },
+    browseOrderDetail: {
+        screen: BrowseOrderDetail, //浏览任务详情
+        navigationOptions: ({ navigation }) => ({
+            title: '浏览任务详情',
         }),
     }
 

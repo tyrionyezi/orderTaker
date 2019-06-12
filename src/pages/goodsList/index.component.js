@@ -24,10 +24,9 @@ import { tabData } from './index.data';
 @observer
 export default class Index extends Component {
     constructor(props) {
-        super(props)
-    }
-    state = {
-        visible: false,
+        super(props);
+        let wrap_type = this.props.navigation.getParam('type')
+        _state.initParams(wrap_type);
     }
 
     onClick = (title) => {
@@ -37,46 +36,34 @@ export default class Index extends Component {
         })
     }
 
-    setAccountSort = () => {
-        this.setState({visible: true})
-        // this.props.navigation.push('setAccount', {
-        //     title: '添加账号',
-        // })
-    }
-    closeModal  = (item) => {
-        console.log(item)
-        this.setState({visible: false})
-    }
-
     componentDidMount() {
-        let wrap_type = this.props.navigation.getParam('type')
-        _state.initParams(wrap_type);
-        _state.getOrderList();
+        _state.getTaskList();
         _state.getAccountList();
     }
 
     render() {
         let cunrrentAcconutData = toJS(_state.allPlatformSet)[_state.tabIndex];
+        let currentPlatformAccount = toJS(_state.currentPlatformAccount)
         return (
             <View style={_style.contianer}>
-                <Tab data={tabData} onClick={_state.tabChange}/>
+                <Tab data={tabData} onClick={_state.tabChange} />
                 {
-                    cunrrentAcconutData.length > 0 ?
-                    <TouchableOpacity 
-                        style={_style.accountBox}
-                        activeOpacity={0.5}
-                        onPress={this.setAccountSort}
-                    >
-                        <Text>{cunrrentAcconutData[0].name}</Text>
-                            <Image style={_style.rightIcon} source={require('./../../asset/rightArrow.png')}/>
-                    </TouchableOpacity>
-                    :
-                    <View style={_style.accountBox}>
-                        <Text>暂无买号</Text>
-                        <TouchableOpacity activeOpacity={0.5} style={_style.btn} onPress={this.onClick}>
-                            <Text style={{ color: '#fff' }}>添加</Text>
+                    JSON.stringify(currentPlatformAccount) !== '{}' ?
+                        <TouchableOpacity
+                            style={_style.accountBox}
+                            activeOpacity={0.5}
+                            onPress={_state.switchModal}
+                        >
+                            <Text>{currentPlatformAccount.name}</Text>
+                            <Image style={_style.rightIcon} source={require('./../../asset/rightArrow.png')} />
                         </TouchableOpacity>
-                    </View>
+                        :
+                        <View style={_style.accountBox}>
+                            <Text>暂无买号</Text>
+                            <TouchableOpacity activeOpacity={0.5} style={_style.btn} onPress={this.onClick}>
+                                <Text style={{ color: '#fff' }}>添加</Text>
+                            </TouchableOpacity>
+                        </View>
                 }
                 <View style={_style.listBox}>
                     <FlatList
@@ -88,14 +75,14 @@ export default class Index extends Component {
                 </View>
                 <Modal
                     popup={true}
-                    visible={this.state.visible}
+                    visible={_state.flagModal || false}
                     animationType="slide-up"
                     maskClosable={true}
                     style={_style.modalSty}
-                    onClose={this.closeModal}
-                    >
+                    onClose={_state.switchModal}
+                >
                     <List
-                        onClick={this.closeModal}
+                        onClick={(item) => _state.setCurrentAccount(_state.tabIndex, item)}
                         data={cunrrentAcconutData}
                     />
                 </Modal>
@@ -120,7 +107,7 @@ const _style = StyleSheet.create({
     btn: {
         paddingHorizontal: 15,
         paddingVertical: 5,
-        backgroundColor: '#2196F3',
+        backgroundColor: '#058efb',
         borderRadius: 15,
     },
     listBox: {
@@ -152,7 +139,7 @@ const _style = StyleSheet.create({
         height: 16
     },
     modalSty: {
-        height:300,
-        paddingVertical:15,
+        height: 300,
+        paddingVertical: 15,
     }
 })

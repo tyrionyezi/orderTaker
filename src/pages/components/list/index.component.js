@@ -33,39 +33,43 @@ export default class List extends Component {
     render() {
         let { data = [] } = this.props;
         return (
-            <FlatList
-                keyExtractor={(item, index) => `f${index}`}
-                data={data}
-                renderItem={({ item }) => (
-                    <TouchableOpacity
-                        activeOpacity={0.5}
-                        style={_style.listBox}
-                        onPress={this.onClick.bind(this, item)}
-                    >
-                        <View>
-                            <Text style={_style.titleTxt}>{item.title}</Text>
-                        </View>
+            <View style={_style.listBox}>
+                {
+                    data && data.map((item, index) => {
+                        return (
+                            <TouchableOpacity
+                                key={`l${index}`}
+                                activeOpacity={0.5}
+                                style={_style.itemBox}
+                                onPress={this.onClick.bind(this, item)}
+                            >
+                                <View>
+                                    <Text style={_style.titleTxt}>{item.title}</Text>
+                                </View>
 
-                        <View style={_style.right}>
-                            <Text>{item.value}</Text>
-                            {
-                                item.isTail ?
-                                    <Image style={_style.rightIcon} source={require('./../../../asset/rightArrow.png')}></Image>
-                                    :
-                                    <View />
-                            }
-                        </View>
+                                <View style={_style.right}>
+                                    <Text>{item.value}</Text>
+                                    {
+                                        item.isTail ?
+                                            <Image style={_style.rightIcon} source={require('./../../../asset/rightArrow.png')}></Image>
+                                            :
+                                            <View />
+                                    }
+                                </View>
 
-                    </TouchableOpacity>
-                )
+                            </TouchableOpacity>
+                        )
+                    })
                 }
-            />
+            </View>
         )
     }
 }
 
 const _style = StyleSheet.create({
     listBox: {
+    },
+    itemBox: {
         height: 50,
         marginBottom: 1,
         paddingHorizontal: 15,

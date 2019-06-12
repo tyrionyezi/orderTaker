@@ -25,8 +25,8 @@ export default class Index extends Component {
                         订单
                    </Text>
                 </View>
-                <Card {...this.props} title={'已接浏览任务'} data={card1Data} />
-                <Card {...this.props} title={'已接垫付任务'} data={card2Data} />
+                <Card {...this.props} title={'已接浏览任务'} type={0} data={card1Data} />
+                <Card {...this.props} title={'已接垫付任务'} type={1} data={card2Data} />
             </View>
         )
     }

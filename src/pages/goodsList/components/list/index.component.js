@@ -21,9 +21,9 @@ export default class Index extends Component {
         super(props)
     }
 
-    onClick = (item) => {
+    onClick = (item, index) => {
         if (!!this.props.onClick) {
-            this.props.onClick(item)
+            this.props.onClick(item, index)
         }
     }
 
@@ -31,12 +31,12 @@ export default class Index extends Component {
         let { data } = this.props;
         return (
             <View style={_style.listBox}>
-                {data&&data.map((item,index) => {
+                {data && data.map((item, index) => {
                     return (
                         <TouchableOpacity
                             key={`l${index}`}
                             style={_style.itemBox}
-                            onPress={this.onClick.bind(this,item,index)}
+                            onPress={this.onClick.bind(this, item, index)}
                         >
                             <Text style={_style.Txt}>{item.name}</Text>
                             <Text>1</Text>
@@ -55,7 +55,7 @@ const _style = StyleSheet.create({
         alignItems: 'center',
     },
     itemBox: {
-        width:width,
+        width: width,
         paddingHorizontal: 15,
         height: 40,
         flexDirection: 'row',
@@ -68,7 +68,7 @@ const _style = StyleSheet.create({
         borderBottomColor: 'gray',
     },
     Txt: {
-        fontSize:18,
-        lineHeight:30,
+        fontSize: 18,
+        lineHeight: 30,
     }
 })

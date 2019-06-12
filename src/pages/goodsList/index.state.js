@@ -5,29 +5,71 @@ import moment from 'moment';
 
 class State {
 
-    rootInfo = {
-        wrap_type: 0,
-        platform: 1,
-    }
-
-    initParams = () =>{
-        this.tabIndex = 1;
+    //初始化参数
+    initParams = (type) => {
+        console.log(type, 'tt')
+        this.tabIndex = 0;
+        this.flagModal = false;
         this.allPlatformSet = {
+            '0': [],
             '1': [],
             '2': [],
-            '3': [], 
-        }
+        };
+        this.singleAccount = {
+            '0': {},
+            '1': {},
+            '2': {},
+        };
+        this.currentPlatformAccount = {};
+        this.rootInfo.wrap_type = type;
     };
 
+    rootInfo = {
+        wrap_type: 1,
+        platform: 0,
+    };
+
+    @observable flagModal = false;
+
+    @action switchModal = () => {
+        this.flagModal = !this.flagModal;
+    }
+
+    singleAccount = {
+        '0': {},
+        '1': {},
+        '2': {},
+    }
+
+    setSingleAccount = (index = 0, obj = {}) => {
+        this.singleAccount[index] = obj;
+        this.setCurrnetPlatformAccount();
+    }
+
+    setCurrentAccount = (index = 0, obj = {}) => {
+        this.switchModal();
+        this.singleAccount[index] = obj;
+        this.setCurrnetPlatformAccount();
+    }
+
+    //当前平台的接单账号
+    @observable currentPlatformAccount = {};
+
+    /**
+     * 设置当前平台接单账号
+     */
+    setCurrnetPlatformAccount = () => {
+        this.currentPlatformAccount = this.singleAccount[this.tabIndex];
+        console.log(toJS(this.singleAccount))
+    }
+
     @observable dataList = [];
-    getOrderList = () => {
+    getTaskList = () => {
         let url = 'getOrderList';
         let params = {
-            wrap_type: 1,
-            type: 6,
+            wrap_type: this.rootInfo.wrap_type,
+            type: this.tabIndex,
         };
-        // console.log(global.http);
-        // return;
         http.post(url, params).then((res) => {
             console.log(res, 'resresres')
             let { data } = res;
@@ -35,50 +77,41 @@ class State {
         })
     }
 
-    @observable allPlatformSet = {
+    // 所有平台账号的数据
+    allPlatformSet = {
+        '0': [],
         '1': [],
         '2': [],
-        '3': [], 
     }
-
-    classifyData = (arr = []) => {
-        let data = {
-            '1': [],
-            '2': [],
-            '3': [], 
-        }
-        arr.map((item,index) => {
-            if(item.platform === '1') {
-                data['1'].push(item)
-            }else if(item.platform === '2') {
-                data['2'].push(item)
-            }else if(item.platform === '2') {
-                data['3'].push(item)
-            }
-        })
-
-        this.allPlatformSet = data;
-    }
-    @observable accountList = [];
     getAccountList = () => {
         let url = 'getBuyerList';
         let params = {
-            id:20
+            id: 20
         }
-        if(params.id === '') {
+        if (params.id === '') {
             return
         }
         http.post(url, params).then((res) => {
             let { data = [] } = res;
-            this.accountList = data;
-            this.classifyData(data);
+            this.allPlatformSet = data;
+            if (this.allPlatformSet['0'].length > 0) {
+                this.setSingleAccount(0, this.allPlatformSet['0'][0])
+            }
+
+            if (this.allPlatformSet['1'].length > 0) {
+                this.setSingleAccount(1, this.allPlatformSet['1'][0])
+            }
+
+            if (this.allPlatformSet['2'].length > 0) {
+                this.setSingleAccount(2, this.allPlatformSet['2'][0])
+            }
         })
     }
 
-    @observable tabIndex = 1;
+    @observable tabIndex = 0;
     @action tabChange = (item, index) => {
         this.tabIndex = item.value;
-        this.getOrderList()
+        this.setCurrnetPlatformAccount();
     }
 
     /**
@@ -86,21 +119,21 @@ class State {
      * @param
      */
     receiveOrder = (item) => {
-        console.log(item, 'itemitemitem')
+        console.log(toJS(this.currentPlatformAccount), 'tt')
         let url = 'orderReceiving';
         let params = {
             serial: item.serial,
-            buyer: toJS(this.allPlatformSet)[this.tabIndex][0].id,
+            buyer: toJS(this.currentPlatformAccount).id,
             id: 20
         }
-        if(params.id === '') {
+        if (params.id === '') {
             Toast.fail("请登录", 2, () => { }, true);
             return
         }
         http.post(url, params).then((res) => {
-            if(res === 'sucess') {
+            if (res === 'sucess') {
                 Toast.success("接单成功", 2, () => { }, true);
-                this.getOrderList();
+                this.getTaskList();
             }
         })
     }

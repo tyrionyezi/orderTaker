@@ -22,7 +22,7 @@ export default class Index extends Component {
     constructor(props) {
         super(props)
     }
-    componentDidMount () {
+    componentDidMount() {
         let rootInfo = this.props.navigation.state.params;
         _state.initParams(rootInfo)
     }
@@ -36,7 +36,7 @@ export default class Index extends Component {
                             clear
                             value={_state.addFileds.name}
                             onChange={name => {
-                                _state.setAddFiledsValue('name',name)
+                                _state.setAddFiledsValue('name', name)
                             }}
                             placeholder="请输入"
                         >
@@ -49,7 +49,7 @@ export default class Index extends Component {
                             ]}
                             cols={1}
                             value={_state.addFileds.sex}
-                            onOk={(sex) => _state.setAddFiledsValue('sex',sex)}
+                            onOk={(sex) => _state.setAddFiledsValue('sex', sex)}
                         >
                             <List.Item arrow="horizontal" style={_style.label}>性别</List.Item>
                         </Picker>
@@ -58,7 +58,7 @@ export default class Index extends Component {
                             mode="date"
                             minDate={new Date(1980, 1, 1)}
                             maxDate={new Date(2026, 11, 3)}
-                            onOk={(Ymd) => _state.setAddFiledsValue('Ymd',Ymd)}
+                            onOk={(Ymd) => _state.setAddFiledsValue('Ymd', Ymd)}
                             format="YYYY-MM-DD"
                         >
                             <List.Item arrow="horizontal" style={_style.label}>生日</List.Item>
@@ -91,7 +91,7 @@ export default class Index extends Component {
                         <InputItem
                             clear
                             value={_state.addFileds.serial}
-                            onChange={(serial) => _state.setAddFiledsValue('serial',serial)}
+                            onChange={(serial) => _state.setAddFiledsValue('serial', serial)}
                             placeholder="请输入"
                         >
                             订单编号
@@ -99,7 +99,7 @@ export default class Index extends Component {
                         <InputItem
                             clear
                             value={_state.addFileds.receiver_name}
-                            onChange={(receiver_name) => _state.setAddFiledsValue('receiver_name',receiver_name)}
+                            onChange={(receiver_name) => _state.setAddFiledsValue('receiver_name', receiver_name)}
                             placeholder="请输入"
                         >
                             收件人
@@ -107,7 +107,7 @@ export default class Index extends Component {
                         <InputItem
                             clear
                             value={_state.addFileds.recevier_tel}
-                            onChange={(recevier_tel) => _state.setAddFiledsValue('recevier_tel',recevier_tel)}
+                            onChange={(recevier_tel) => _state.setAddFiledsValue('recevier_tel', recevier_tel)}
                             placeholder="请输入"
                         >
                             电话
@@ -116,14 +116,14 @@ export default class Index extends Component {
                             data={data}
                             cols={3}
                             value={_state.addFileds.address}
-                            onOk={(address) => _state.setAddFiledsValue('address',address)}
+                            onOk={(address) => _state.setAddFiledsValue('address', address)}
                         >
                             <List.Item arrow="horizontal" style={_style.label}>省市选择</List.Item>
                         </Picker>
                         <InputItem
                             clear
                             value={_state.addFileds.street}
-                            onChange={(street) => _state.setAddFiledsValue('street',street)}
+                            onChange={(street) => _state.setAddFiledsValue('street', street)}
                             placeholder="请输入"
                         >
                             街道地址
@@ -135,7 +135,7 @@ export default class Index extends Component {
                         style={_style.btnBox}
                         activeOpacity={0.5}
                         onPress={_state.addAccount}
-                        >
+                    >
                         <Text style={_style.btnTxt}>确认提交</Text>
                     </TouchableOpacity>
                 </View>
@@ -164,7 +164,7 @@ const _style = StyleSheet.create({
         height: 55,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#089de0',
+        backgroundColor: '#058efb',
         borderRadius: 30,
         // marginHorizontal: 'auto',
     },
