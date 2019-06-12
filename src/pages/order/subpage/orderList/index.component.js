@@ -24,15 +24,11 @@ import _state from './index.state';
 export default class Index extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.navigation)
         let data = this.props.navigation.getParam('data', {});
-        let type = this.props.navigation.getParam('type', 0);
+        let type = this.props.navigation.getParam('type', 1);
         _state.initParams(data, type);
     }
 
-    onClick = () => {
-        this.props.navigation.push('browseOrderDetail')
-    }
 
     componentDidMount() {
         _state.getHasOrderList();
@@ -42,9 +38,6 @@ export default class Index extends Component {
         return (
             <View style={_style.container}>
                 <List {...this.props} data={toJS(_state.orderList)} />
-                <TouchableOpacity onPress={this.onClick}>
-                    <Text>btnqweqweqweq</Text>
-                </TouchableOpacity>
             </View>
         )
     }

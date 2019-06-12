@@ -48,6 +48,7 @@ export default class Index extends Component {
                 <List>
                     <InputItem
                         clear
+                        type="password"
                         value={this.state.oldPwd}
                         onChange={oldPwd => {
                             this.setState({
@@ -60,6 +61,7 @@ export default class Index extends Component {
                         </InputItem>
                     <InputItem
                         clear
+                        type="password"
                         value={this.state.newPwd}
                         onChange={newPwd => {
                             this.setState({

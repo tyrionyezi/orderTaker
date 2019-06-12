@@ -25,8 +25,9 @@ export default class List extends Component {
     }
 
     onClick = (item) => {
+
         if (item.isTail && !!this.props.navigation) {
-            this.props.navigation.push(item.path)
+            this.props.navigation.push(item.path, { data: item })
         }
     }
 

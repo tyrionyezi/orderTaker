@@ -14,10 +14,11 @@ import {
     DeviceEventEmitter,
     Alert
 } from 'react-native';
+import { observer } from 'mobx-react';
 import { NoticeBar, Toast, Button } from 'antd-mobile-rn';
 import Header from './components/header/index.component';
 import List from './../components/list/index.component';
-import { observer } from 'mobx-react';
+
 import { listData } from './index.data';
 @observer
 export default class Index extends Component {

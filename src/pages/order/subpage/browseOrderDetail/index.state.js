@@ -4,74 +4,148 @@ import http from './../../../../config/fetch';
 import moment from 'moment';
 
 class State {
-    initParams = (params) => {
-        this.reqParams['platform'] = params.platform;
+    rootInfo = {
+        serialNumber: '',
     }
 
-    @observable orderList = [];
+    initParams = (data) => {
+        this.rootInfo.serialNumber = data.serial;
+    }
 
     //账户信息
-    acconutInfoList = [
+    @observable acconutInfoList = [
         {
             title: '任务账号',
-            value: '12312',
+            value: '',
             isTail: false,
         }, {
             title: '订单ID',
-            value: '12312',
+            value: '',
             isTail: false,
         }, {
             title: '任务类型',
-            value: 'ww',
+            value: '',
             isTail: false,
         }, {
             title: '搜索关键字',
-            value: '12312',
+            value: '',
             isTail: false,
         }, {
             title: '是否允许筛选',
-            value: '12312',
+            value: '',
             isTail: false,
         }, {
             title: '排序方式',
-            value: '12312',
+            value: '',
             isTail: false,
         }, {
             title: '收货人数',
-            value: '12312',
+            value: '',
             isTail: false,
         },
     ]
 
 
     /**
-     * 获取订单列表
+     * 获取订单详情
      */
-    getOrderList = () => {
+    getOrderInfo = () => {
         let url = 'orderInfo';
-        let params = this.reqParams;
-        if (params.id === '') {
-            Toast.fail("请登录", 2, () => { }, true);
+        let params = {
+            serial: this.rootInfo.serialNumber,
+        }
+        if (params.serial === '') {
+            Toast.fail("该订单不存在", 2, () => { }, true);
             return
         }
         http.post(url, params).then((res) => {
-            let { data = [] } = res;
+            let { data = {} } = res;
             this.processOrderListData(data);
         })
     };
 
     //加工数据
-    processOrderListData = (arr = []) => {
-        let data = [];
-        arr.map((item, index) => {
-            data.push({
-                title: item,
+    processOrderListData = (obj = []) => {
+        let data = [
+            {
+                title: '任务账号',
+                value: obj.name,
+                isTail: false,
+            }, {
+                title: '订单ID',
+                value: obj.serial,
+                isTail: false,
+            }, {
+                title: '任务类型',
+                value: obj.type,
+                isTail: false,
+            }, {
+                title: '搜索关键字',
+                value: obj.keywords,
+                isTail: false,
+            }, {
+                title: '是否允许筛选',
                 value: '',
-                isTail: true,
-                path: 'orderList'
-            })
+                isTail: false,
+            }, {
+                title: '排序方式',
+                value: '',
+                isTail: false,
+            }, {
+                title: '收货人数',
+                value: '',
+                isTail: false,
+            },
+        ];
+        this.acconutInfoList = data;
+    }
+
+    formParams = {
+        keywords: '',
+        shop_name: '',
+        goods_url: '',
+    }
+
+    //获取数据
+    onChange = (key, value) => {
+        console.log(key, value);
+        this.formParams[key] = value;
+    };
+
+    /**
+     * 完成订单
+     */
+    orderComplete = () => {
+        let url = 'orderComplete';
+        let params = {
+            serial: this.rootInfo.serialNumber,
+            shop_name: this.formParams.shop_name,
+            goods_url: this.formParams.goods_url,
+            keywords: this.formParams.keywords,
+        }
+        if (params.serial === '') {
+            Toast.fail("该订单不存在", 2, () => { }, true);
+            return
+        }
+        if (params.keywords === '') {
+            Toast.fail("请填写关键字", 2, () => { }, true);
+            return
+        }
+        if (params.shop_name === '') {
+            Toast.fail("请填写商店名称", 2, () => { }, true);
+            return
+        }
+        if (params.goods_url === '') {
+            Toast.fail("请填写商品链接", 2, () => { }, true);
+            return
+        }
+
+        http.post(url, params).then((res) => {
+            console.log(res, 'rrrrr')
+            // if (params.goods_url) {
+            //     Toast.success("请填写商品链接", 2, () => { }, true);
+            // }
         })
-        this.orderList = data;
     }
 }
 export default new State()

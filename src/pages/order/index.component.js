@@ -9,9 +9,12 @@ import {
     TouchableOpacity,
     Dimensions,
 } from 'react-native';
+import { observer } from 'mobx-react';
 const { height, width } = Dimensions.get('window');
 import Card from './../components/card/index.component';
 import { card1Data, card2Data } from './index.data';
+
+@observer
 export default class Index extends Component {
     constructor(props) {
         super(props)
@@ -25,8 +28,8 @@ export default class Index extends Component {
                         订单
                    </Text>
                 </View>
-                <Card {...this.props} title={'已接浏览任务'} type={0} data={card1Data} />
-                <Card {...this.props} title={'已接垫付任务'} type={1} data={card2Data} />
+                <Card {...this.props} title={'已接浏览任务'} type={1} data={card1Data} />
+                <Card {...this.props} title={'已接垫付任务'} type={0} data={card2Data} />
             </View>
         )
     }

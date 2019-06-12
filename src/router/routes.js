@@ -10,6 +10,7 @@ import UpdatePassword from './../pages/mine/subpage/updatePassoword/index.compon
 import SetAccount from './../pages/goodsList/subPage/setAccount/index.compoent';
 import OrderList from './../pages/order/subpage/orderList/index.component';
 import BrowseOrderDetail from './../pages/order/subpage/browseOrderDetail/index.component';
+import AdvancePaymentOrderDetail from './../pages/order/subpage/advancePaymentOrderDetail/index.component';
 export default Routes = {
     Login: {
         screen: Login,
@@ -77,6 +78,12 @@ export default Routes = {
         screen: BrowseOrderDetail, //浏览任务详情
         navigationOptions: ({ navigation }) => ({
             title: '浏览任务详情',
+        }),
+    },
+    advancePaymentOrderDetail: {
+        screen: AdvancePaymentOrderDetail, //垫付任务详情
+        navigationOptions: ({ navigation }) => ({
+            title: '垫付任务详情',
         }),
     }
 
