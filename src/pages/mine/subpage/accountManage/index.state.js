@@ -8,6 +8,29 @@ class State {
     /**
      * 获取买手账号列表
      */
+    accountList = [
+        {
+            title: '章三',
+            value: '1412312',
+            path: 'Accont',
+            isTail: true
+        }, {
+            title: '章三',
+            value: '1412312',
+            path: 'Accont',
+            isTail: true
+        }, {
+            title: '章三',
+            value: '1412312',
+            path: 'Accont',
+            isTail: true
+        }, {
+            title: '章三',
+            value: '1412312',
+            path: 'Accont',
+            isTail: true
+        },
+    ]
     getBuyerList = () => {
         let url = 'getBuyerList';
         let params = {

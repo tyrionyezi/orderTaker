@@ -36,7 +36,6 @@ export default class Index extends Component {
             Toast.fail("不能为空", 2, () => { }, true)
             return
         }
-        console.log(params, 'paramsparams')
         Http.post(url, params).then((res) => {
             console.log(res, 'rrrr')
         })

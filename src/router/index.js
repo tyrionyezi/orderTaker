@@ -22,7 +22,7 @@ const routerStack = createStackNavigator({
     ...routes,
 }, {
         //默认第一次显示首页
-        initialRouteName: 'login',
+        initialRouteName: 'navigator',
         // 定义渲染和过渡的样式
         mode: 'modal',
         // 指定标头的呈现方式

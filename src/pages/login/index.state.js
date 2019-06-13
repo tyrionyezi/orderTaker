@@ -35,10 +35,17 @@ class State {
             Toast.fail("密码不能为空", 2, () => { }, true);
             return
         }
-        console.log(params, '12313212');
         let result = await http.post(url, params);
-        if (result !== 'success') {
+        if (result.success === 'true') {
+            storage.save({
+                key: 'loginInfo',
+                data: result.info
+            });
+            Toast.success(`登陆成功`, 1, () => { }, true);
             return true
+        } else {
+            Toast.fail(`登陆失败，${result}`, 1, () => { }, true);
+            return false
         }
 
     }

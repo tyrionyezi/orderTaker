@@ -20,7 +20,6 @@ class State {
      * 获取订单列表
      */
     getHasOrderList = () => {
-        Toast.fail("开始", 1, () => { }, true);
         let url = 'orderHas';
         let params = {
             id: 20,
@@ -33,8 +32,6 @@ class State {
         }
         http.post(url, params).then((res) => {
             let { data = [] } = res;
-            Toast.fail(data.length, 1, () => { }, true);
-            Toast.fail("结束", 1, () => { }, true);
             this.processOrderListData(data);
         })
     };

@@ -57,7 +57,7 @@ class State {
         }
         let result = await http.post(url, params);
         if (result === 'success') {
-            Toast.fail(`注册成功，${result}`, 1, () => { }, true);
+            Toast.success(`注册成功`, 1, () => { }, true);
             return true
         } else {
             Toast.fail(`注册失败，${result}`, 1, () => { }, true);

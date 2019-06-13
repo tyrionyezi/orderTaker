@@ -18,6 +18,7 @@ import {
 import { observer } from 'mobx-react';
 import Btn from './../../../components/button/index.component';
 import ImagePicker from './../../../components/ImagePicker/index.component';
+import { List, Picker } from 'antd-mobile-rn';
 import _state from './index.state';
 
 @observer
@@ -32,9 +33,9 @@ export default class Index extends Component {
                     showsVerticalScrollIndicator={false}
                 >
                     <View style={_style.inputBox}>
-                        <Text style={_style.titleTxt}>真实姓名</Text>
+                        <Text style={_style.titleTxt}>持卡人姓名</Text>
                         <TextInput
-                            placeholder='请输入真实姓名'
+                            placeholder='请输入持卡人姓名'
                             autoCapitalize={'none'}
                             style={[_style.textInput]}
                             value={_state.name}
@@ -43,33 +44,44 @@ export default class Index extends Component {
                         />
                     </View>
                     <View style={_style.inputBox}>
-                        <Text style={_style.titleTxt}>身份证号码</Text>
+                        <Text style={_style.titleTxt}>银行卡号</Text>
                         <TextInput
-                            placeholder='请输入身份证号码'
+                            placeholder='请输入银行卡号'
                             autoCapitalize={'none'}
                             style={[_style.textInput]}
                             value={_state.idCard}
                             onChangeText={_state.idCardChange}
                         />
                     </View>
+                    <Picker
+                        data={[
+                            {
+                                label: '中国工商银行',
+                                value: '1'
+                            }, {
+                                label: '中国工商银行',
+                                value: '1'
+                            }, {
+                                label: '中国工商银行',
+                                value: '1'
+                            },
+                        ]}
+                        cols={1}
+                        value={[]}
+                        onChange={() => { }}
+                    >
+                        <List.Item style={{ paddingLeft: -10, fontSize: 14, justifyContent: 'space-between' }} arrow="horizontal" onPress={this.onPress}>
+                            开户银行
+                        </List.Item>
+                    </Picker>
                     <View style={_style.imagePicker}>
-                        <Text style={{ height: 30 }}>证件照片</Text>
+                        <Text style={{ height: 30 }}>银行卡正面照片</Text>
                         <ImagePicker
+                            type='1'
                             width={300}
                             height={180}
                             borderRadius={10}
-                            type='1'
                         />
-                        <ImagePicker
-                            width={300}
-                            height={180}
-                            borderRadius={10}
-                            type='1'
-                        />
-                    </View>
-                    <View style={_style.statusBox}>
-                        <Text>审核状态</Text>
-                        <Text>未完成</Text>
                     </View>
                     <View>
                         <Btn txt={'提交'} />
@@ -109,7 +121,7 @@ const _style = StyleSheet.create({
     },
     imagePicker: {
         marginTop: 10,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     statusBox: {
         marginHorizontal: 10,
@@ -118,9 +130,5 @@ const _style = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 15,
         height: 40,
-        borderWidth: 0,
-        borderBottomWidth: 1,
-        borderBottomColor: '#c1bcbc',
-        marginBottom: 10,
     }
 })

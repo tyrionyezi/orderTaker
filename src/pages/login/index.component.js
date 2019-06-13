@@ -38,12 +38,7 @@ export default class Index extends Component {
         this.props.navigation.push('register');
     }
 
-    componentDidMount() {
-        storage.save({
-            key: 'loginInfo',
-            data: { id: '100', password: '1' }
-        });
-    }
+    componentDidMount() { }
 
     doLogin = async () => {
         let result = await _state.login();

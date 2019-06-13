@@ -12,7 +12,7 @@ const listData = [
     }, {
         title: '买号管理',
         value: '',
-        path: '',
+        path: 'accountMange',
         isTail: true,
     }, {
         title: '新消息通知',

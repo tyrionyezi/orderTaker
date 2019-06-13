@@ -14,6 +14,7 @@ import BrowseOrderDetail from './../pages/order/subpage/browseOrderDetail/index.
 import AdvancePaymentOrderDetail from './../pages/order/subpage/advancePaymentOrderDetail/index.component';
 import AboutApp from './../pages/mine/subpage/aboutApp/index.component';
 import AccountMange from './../pages/mine/subpage/accountManage/index.component';
+import AddbankCard from './../pages/mine/subpage/addBankCard/index.component';
 export default Routes = {
     login: {
         screen: Login,
@@ -114,5 +115,11 @@ export default Routes = {
         navigationOptions: ({ navigation }) => ({
             title: navigation.state.params.data.title,
         }),
-    }
+    },
+    addbankCard: {
+        screen: AddbankCard, //垫付任务详情
+        navigationOptions: ({ navigation }) => ({
+            title: '添加银行卡'
+        }),
+    },
 }
