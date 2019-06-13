@@ -14,14 +14,20 @@ import {
     DeviceEventEmitter,
     Alert
 } from 'react-native';
+import _state from './index.state';
 export default class Index extends Component {
     constructor(props) {
         super(props)
     }
 
+    componentDidMount() {
+        _state.getBuyerList();
+    }
     render() {
         return (
-            <View></View>
+            <View>
+
+            </View>
         )
     }
 }

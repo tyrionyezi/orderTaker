@@ -27,26 +27,27 @@ export default class Index extends Component {
     }
 
     telOnFocus = () => {
-        this.setState({ tel: !this.state.tel });
+        this.setState({ tel: !this.state.tel })
     }
 
     passwordOnFocus = () => {
-        this.setState({ password: !this.state.password });
+        this.setState({ password: !this.state.password })
+    }
+
+    nameOnFocus = () => {
+        this.setState({ name: !this.state.name })
+    }
+
+    emailOnFocus = () => {
+        this.setState({ email: !this.state.email })
     }
 
     link = () => {
-        this.props.navigation.push('register');
+        this.props.navigation.push('login')
     }
 
-    componentDidMount() {
-        storage.save({
-            key: 'loginInfo',
-            data: { id: '100', password: '1' }
-        });
-    }
-
-    doLogin = async () => {
-        let result = await _state.login();
+    doRegister = async () => {
+        let result = await _state.register();
         if (result) {
             this.props.navigation.push('navigator');
         }
@@ -58,9 +59,9 @@ export default class Index extends Component {
             <View style={_style.contianer}>
                 <View style={_style.loginBox}>
                     <View style={_style.layout}>
-                        <Image style={_style.icon} source={require('./../../asset/login.png')} />
+                        <Text style={_style.titleTxt}>手机号</Text>
                         <TextInput
-                            placeholder='手机号'
+                            placeholder='请输入手机号'
                             keyboardType={'numeric'}
                             autoCapitalize={'none'}
                             autoComplete={'tel'}
@@ -73,10 +74,34 @@ export default class Index extends Component {
                         />
                     </View>
                     <View style={_style.layout}>
-                        <Image style={_style.icon} source={require('./../../asset/password.png')} />
+                        <Text style={_style.titleTxt}>账户名</Text>
+                        <TextInput
+                            placeholder='请输入账户名'
+                            autoCapitalize={'none'}
+                            style={[_style.textInput, this.state.name ? _style.onFoucs : {}]}
+                            value={_state.name}
+                            onFocus={this.nameOnFocus}
+                            onBlur={this.nameOnFocus}
+                            onChangeText={_state.nameChange}
+                        />
+                    </View>
+                    <View style={_style.layout}>
+                        <Text style={_style.titleTxt}>邮箱</Text>
+                        <TextInput
+                            placeholder='请输入邮箱'
+                            autoCapitalize={'none'}
+                            style={[_style.textInput, this.state.email ? _style.onFoucs : {}]}
+                            value={_state.email}
+                            onFocus={this.emailOnFocus}
+                            onBlur={this.emailOnFocus}
+                            onChangeText={_state.emailChange}
+                        />
+                    </View>
+                    <View style={_style.layout}>
+                        <Text style={_style.titleTxt}>密码</Text>
                         <TextInput
                             autoCapitalize={'none'}
-                            placeholder='密码'
+                            placeholder='请输入密码'
                             keyboardType={'default'}
                             secureTextEntry={true}
                             autoComplete={'password'}
@@ -87,15 +112,30 @@ export default class Index extends Component {
                             onChangeText={_state.pwdChange}
                         />
                     </View>
+                    {/* <View style={_style.layout}>
+                        <Text style={_style.titleTxt}>确认密码</Text>
+                        <TextInput
+                            autoCapitalize={'none'}
+                            placeholder='请再次输入密码'
+                            keyboardType={'default'}
+                            secureTextEntry={true}
+                            autoComplete={'password'}
+                            style={[_style.textInput, this.state.password ? _style.onFoucs : {}]}
+                            value={_state.password}
+                            onFocus={this.passwordOnFocus}
+                            onBlur={this.passwordOnFocus}
+                            onChangeText={_state.pwdChange}
+                        />
+                    </View> */}
                     <View style={_style.btnBox}>
-                        <Btn txt={'登陆'} onClick={this.doLogin} />
+                        <Btn txt={'注册'} onClick={this.doRegister} />
                     </View>
                 </View>
                 <View style={_style.info}>
                     <Text
                         onPress={this.link}
                         style={_style.text}
-                    >登陆遇到问题？去注册</Text>
+                    >已有账号？去登陆</Text>
                 </View>
             </View>
         )
@@ -108,6 +148,7 @@ const _style = StyleSheet.create({
         width: width,
         alignItems: 'center',
         justifyContent: 'center',
+        // position: 'relative',
         // backgroundColor: 'yellow',
     },
     loginBox: {
@@ -121,7 +162,7 @@ const _style = StyleSheet.create({
         borderWidth: 0,
         borderBottomWidth: 1,
         borderBottomColor: '#c1bcbc',
-        width: '70%',
+        width: '65%',
         height: 40,
         // borderBottomColor: '#0490ffa6',
         // backgroundColor: 'green'
@@ -131,13 +172,13 @@ const _style = StyleSheet.create({
     },
     layout: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        height: 70,
+        height: 60,
     },
-    icon: {
-        width: 30,
-        height: 30,
+    titleTxt: {
+        width: '25%',
+        textAlign: 'right'
     },
     btnBox: {
         marginTop: 50,

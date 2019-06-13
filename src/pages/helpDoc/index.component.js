@@ -18,23 +18,22 @@ export default class Index extends Component {
     }
 
     render() {
-        let { data = [] } = this.props
-        let { title } = this.props.navigation.state.params;
+        let data = this.props.navigation.getParam('data', {});
+        let arr = data.guideDoc || [];
         return (
             <View style={_style.contianer}>
-                <Nav {...this.props} title={'帮助中心'} />
-                <View style={_style.titleBox}>
-                    <Text style={_style.TitleTxt}>{title}</Text>
+                {/* <View style={_style.titleBox}>
+                    <Text style={_style.TitleTxt}>{data.title}</Text>
                     <Text>{moment().format("YYYY/MM/DD")}</Text>
-                </View>
+                </View> */}
                 <View style={_style.listBox}>
                     <ScrollView>
                         {
-                            data && data.map((item, index) => {
+                            arr && arr.map((item, index) => {
                                 return (
-                                    <View style={_style.itemBox}>
+                                    <View key={`txt${index}`} style={_style.itemBox}>
                                         <Text style={_style.subTilte}>
-                                            {`${index}.${item.subTilte}`}
+                                            {`${index + 1}.${item.title}`}
                                         </Text>
                                         <Text>
                                             {item.txt}
@@ -73,7 +72,8 @@ const _style = StyleSheet.create({
         fontSize: 18,
     },
     itemBox: {
-        paddingTop: 10
+        flex: 1,
+        paddingTop: 10,
     },
     subTilte: {
         marginBottom: 25,

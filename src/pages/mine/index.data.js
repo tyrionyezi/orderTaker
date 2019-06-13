@@ -21,8 +21,8 @@ const listData = [
         isTail: true,
     }, {
         title: '关于人气云',
-        value: '',
-        path: '',
+        value: '1.0.0',
+        path: 'aboutApp',
         isTail: true,
     },
 ]

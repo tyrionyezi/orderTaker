@@ -16,9 +16,8 @@ export default class Index extends Component {
         super(props)
     }
     onClick = (item, index) => {
-        console.log(item, index)
         this.props.navigation.push(item.path, {
-            title: item.title
+            data: item
         })
     }
     render() {

@@ -7,7 +7,6 @@ class State {
 
     //初始化参数
     initParams = (type) => {
-        console.log(type, 'tt')
         this.tabIndex = 0;
         this.flagModal = false;
         this.allPlatformSet = {
@@ -71,7 +70,6 @@ class State {
             type: this.tabIndex,
         };
         http.post(url, params).then((res) => {
-            console.log(res, 'resresres')
             let { data } = res;
             this.dataList = data;
         })

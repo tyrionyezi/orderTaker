@@ -9,27 +9,27 @@ import {
     Image,
     TouchableOpacity,
     Dimensions,
-} from 'react-native'
+} from 'react-native';
+import { guideList } from './index.data';
 export default class Index extends Component {
     constructor(props) {
         super(props)
     }
 
-    onClick = (title) => {
+    onClick = (item) => {
         this.props.navigation.push('HelpDoc', {
-            title: title
+            data: item
         })
     }
 
     render() {
-        let { data = [] } = this.props;
         return (
             <View style={_style.contianer}>
                 <View style={_style.listBox}>
                     {
-                        data && data.map((item, index) => {
+                        guideList && guideList.map((item, index) => {
                             return (
-                                <TouchableOpacity key={`t${index}`} activeOpacity={0.5} style={_style.itemBox} onPress={this.onClick.bind(this, title)}>
+                                <TouchableOpacity key={`t${index}`} activeOpacity={0.5} style={_style.itemBox} onPress={this.onClick.bind(this, item)}>
                                     <View style={_style.leftBox}>
                                         <Image style={_style.leftIcon} source={require('./../../asset/plane.png')} />
                                         <Text>{item.title}</Text>

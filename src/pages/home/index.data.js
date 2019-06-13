@@ -9,23 +9,24 @@ const cardBoxData = [
         title: '新手指导',
         value: '0',
         path: 'GuideList'
-    }, {
-        icon: waiter,
-        title: '在线客服',
-        value: '0',
-    }, {
-        icon: share,
-        title: '邀请好友',
-        value: '0',
-    }, {
-        icon: sign_in,
-        title: '每日签到',
-        value: '0',
-    }, {
-        icon: testing,
-        title: '考试中心',
-        value: '0',
     },
+    // {
+    //     icon: waiter,
+    //     title: '在线客服',
+    //     value: '0',
+    // }, {
+    //     icon: share,
+    //     title: '邀请好友',
+    //     value: '0',
+    // }, {
+    //     icon: sign_in,
+    //     title: '每日签到',
+    //     value: '0',
+    // }, {
+    //     icon: testing,
+    //     title: '考试中心',
+    //     value: '0',
+    // },
 ]
 
 const guideListData = [

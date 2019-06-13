@@ -26,14 +26,19 @@ export default class Home extends Component {
     }
 
     onClick = () => {
-
+        this.props.navigation.push('GuideList', {
+            data: { title: '新手指南' },
+        })
     }
 
     render() {
         return (
             <View style={_style.main}>
                 <Header />
-                <View style={_style.more}>
+                <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={this.onClick}
+                    style={_style.more}>
                     <View style={_style.direction}>
                         <Image style={_style.bellIcon} source={require('./../../asset/bell.png')} />
                         <Text>指南</Text>
@@ -42,7 +47,7 @@ export default class Home extends Component {
                         <Text>更多</Text>
                         <Image style={_style.rightIcon} source={require('./../../asset/rightArrow.png')} />
                     </View>
-                </View>
+                </TouchableOpacity>
                 <CardBox
                     {...this.props}
                     data={cardBoxData} />
