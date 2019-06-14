@@ -39,8 +39,8 @@ export default class App extends Component {
             mediaType: 'photo',
             videoQuality: 'high',
             durationLimit: 10,
-            maxWidth: 300,
-            maxHeight: 180,
+            // maxWidth: 300,
+            // maxHeight: 180,
             quality: 0.8,
             angle: 0,
             allowsEditing: false,
@@ -63,10 +63,10 @@ export default class App extends Component {
                 console.log('User tapped custom button: ', response.customButton);
             }
             else {
-                let source = { uri: response.uri };
+                // let source = { uri: response.data };
 
                 // You can also display the image using data:
-                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+                let source = { uri: 'data:image/jpeg;base64,' + response.data };
 
                 this.setState({
                     avatarSource: source
@@ -115,14 +115,16 @@ export default class App extends Component {
                     type === '1' ?
                         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
                             <View style={[{ width: width, height: height, borderRadius: borderRadius }, styles.avatarContainer, { marginBottom: 30 }]}>
-                                {this.state.avatarSource === null ? <Text>选择照片</Text> :
-                                    <Image style={styles.avatar} source={this.state.avatarSource} />
+                                {this.state.avatarSource === null ?
+                                    <Image style={styles.plusIcon} source={require('./../../../asset/plus.png')} />
+                                    :
+                                    <Image style={[styles.avatar, { width: width, height: height, borderRadius: borderRadius }]} resizeMode={'cover'} source={this.state.avatarSource} />
                                 }
                             </View>
                         </TouchableOpacity>
                         :
                         <TouchableOpacity onPress={this.selectVideoTapped.bind(this)}>
-                            <View style={[styles.avatar, styles.avatarContainer]}>
+                            <View style={[styles.avatar, { width: width, height: height, borderRadius: borderRadius }, styles.avatarContainer]}>
                                 <Text>选择视频</Text>
                             </View>
                         </TouchableOpacity>
@@ -152,6 +154,10 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         width: 200,
         height: 200
+    },
+    plusIcon: {
+        width: 50,
+        height: 50
     }
 
 })

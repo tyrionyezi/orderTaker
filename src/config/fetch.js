@@ -1,10 +1,10 @@
 import Qs from 'qs';
 //一个 Promise 就是一个代表了异步操作最终完成或者失败的对象
-const defaultUrl = 'http://106.14.155.124/api/';
+const baseURL = 'http://106.14.155.124/api/';
 export default class HttpUtils {
     static get = (url) => {
         return new Promise(((resolve, reject) => {//resolve 和 reject 函数被调用时，分别将promise的状态改为fulfilled（完成）或rejected（失败）
-            fetch(defaultUrl + url)//默认是GET
+            fetch(baseURL + url)//默认是GET
                 .then(response => response.json())//把数据解析成json格式,然后取出
                 .then(result => {
                     resolve(result);//表示完成
@@ -16,9 +16,9 @@ export default class HttpUtils {
         )
     };
     static post = (url, data) => {
-        console.log(url, data, 'postpost')
+        console.log(url, data, '---------------------------')
         return new Promise(((resolve, reject) => {
-            fetch(defaultUrl + url, {
+            fetch(baseURL + url, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',//告诉服务器，我们能接受json格式的返回类型，

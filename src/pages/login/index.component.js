@@ -19,7 +19,8 @@ import Btn from './../components/button/index.component';
 @observer
 export default class Index extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        _state.initParams();
     }
     state = {
         tel: false,
@@ -43,7 +44,7 @@ export default class Index extends Component {
     doLogin = async () => {
         let result = await _state.login();
         if (result) {
-            this.props.navigation.goBack('navigator');
+            this.props.navigation.replace('navigator');
         }
     }
 

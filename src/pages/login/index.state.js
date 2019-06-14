@@ -1,13 +1,24 @@
 import { observable, action, toJS } from 'mobx';
+import { StackActions, NavigationActions } from 'react-navigation';
 import { Toast } from 'antd-mobile-rn';
 import http from './../../config/fetch';
 import moment from 'moment';
 
 class State {
-    @observable dataList = [];
-
     @observable tel = '';
     @observable password = '';
+
+    initParams = () => {
+        storage.load({
+            key: 'loginInfo',
+            autoSync: false,
+        }).then(res => {
+            this.tel = res.tel;
+            this.password = res.password;
+        }).catch(err => {
+            console.log('失败', err);
+        })
+    }
 
     telChange = (value) => {
         this.tel = value

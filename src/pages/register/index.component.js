@@ -49,7 +49,7 @@ export default class Index extends Component {
     doRegister = async () => {
         let result = await _state.register();
         if (result) {
-            this.props.navigation.push('navigator');
+            this.props.navigation.replace('navigator');
         }
     }
 
