@@ -40,7 +40,7 @@ export default class App extends Component {
             videoQuality: 'high',
             durationLimit: 10,
             maxWidth: 300,
-            maxHeight: 300,
+            maxHeight: 180,
             quality: 0.8,
             angle: 0,
             allowsEditing: false,

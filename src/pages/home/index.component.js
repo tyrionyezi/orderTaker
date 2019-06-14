@@ -18,6 +18,7 @@ import { NoticeBar, Toast, Button } from 'antd-mobile-rn';
 import { observer } from 'mobx-react';
 import Header from './components/header/index.component';
 import CardBox from './components/cardBox/index.component';
+import PermissionAndroidViewComponent from './../components/PermissionAndroidView/index'
 import { cardBoxData } from './index.data'
 @observer
 export default class Home extends Component {
@@ -35,6 +36,7 @@ export default class Home extends Component {
         return (
             <View style={_style.main}>
                 <Header />
+                {Platform.OS == 'android' && <PermissionAndroidViewComponent {...this.props} />}
                 <TouchableOpacity
                     activeOpacity={0.5}
                     onPress={this.onClick}

@@ -20,11 +20,19 @@ import data from './index.data';
 @observer
 export default class Index extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.rootInfo = this.props.navigation.state.params;
+        _state.initParams(this.rootInfo);
     }
-    componentDidMount() {
-        let rootInfo = this.props.navigation.state.params;
-        _state.initParams(rootInfo)
+
+
+    submit = async () => {
+        let result = await _state.addAccount();
+        if (result) {
+            this.props.navigation.replace('GoodsList', {
+                data: this.rootInfo.preData,
+            })
+        }
     }
 
     render() {
@@ -134,7 +142,7 @@ export default class Index extends Component {
                     <TouchableOpacity
                         style={_style.btnBox}
                         activeOpacity={0.5}
-                        onPress={_state.addAccount}
+                        onPress={this.submit}
                     >
                         <Text style={_style.btnTxt}>确认提交</Text>
                     </TouchableOpacity>

@@ -25,14 +25,15 @@ import { tabData } from './index.data';
 export default class Index extends Component {
     constructor(props) {
         super(props);
-        let wrap_type = this.props.navigation.getParam('type')
+        let wrap_type = this.props.navigation.getParam('type');
+        this.preData = this.props.navigation.getParam('data');
         _state.initParams(wrap_type);
     }
-
     onClick = (title) => {
         this.props.navigation.push('Accont', {
             title: '添加账号',
             platform: _state.tabIndex,
+            preData: this.preData
         })
     }
 
@@ -43,7 +44,7 @@ export default class Index extends Component {
 
     render() {
         let cunrrentAcconutData = toJS(_state.allPlatformSet)[_state.tabIndex];
-        let currentPlatformAccount = toJS(_state.currentPlatformAccount)
+        let currentPlatformAccount = toJS(_state.currentPlatformAccount);
         return (
             <View style={_style.contianer}>
                 <Tab data={tabData} onClick={_state.tabChange} />
@@ -67,6 +68,8 @@ export default class Index extends Component {
                 }
                 <View style={_style.listBox}>
                     <FlatList
+                        refreshing={false}
+                        onRefresh={_state.getTaskList}
                         keyExtractor={(item, index) => `f${index}`}
                         data={toJS(_state.dataList)}
                         renderItem={(item) => <ListItem obj={item} onClick={_state.receiveOrder} />}

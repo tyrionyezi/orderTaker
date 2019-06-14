@@ -59,7 +59,6 @@ class State {
      */
     setCurrnetPlatformAccount = () => {
         this.currentPlatformAccount = this.singleAccount[this.tabIndex];
-        console.log(toJS(this.singleAccount))
     }
 
     @observable dataList = [];
@@ -67,9 +66,10 @@ class State {
         let url = 'getOrderList';
         let params = {
             wrap_type: this.rootInfo.wrap_type,
-            type: this.tabIndex,
+            platform: this.tabIndex,
         };
         http.post(url, params).then((res) => {
+            console.log('getTaskListgetTaskList', res)
             let { data } = res;
             this.dataList = data;
         })
@@ -91,6 +91,7 @@ class State {
         }
         http.post(url, params).then((res) => {
             let { data = [] } = res;
+            console.log(res, 'resresresres')
             this.allPlatformSet = data;
             if (this.allPlatformSet['0'].length > 0) {
                 this.setSingleAccount(0, this.allPlatformSet['0'][0])
@@ -117,7 +118,6 @@ class State {
      * @param
      */
     receiveOrder = (item) => {
-        console.log(toJS(this.currentPlatformAccount), 'tt')
         let url = 'orderReceiving';
         let params = {
             serial: item.serial,

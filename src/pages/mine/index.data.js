@@ -20,7 +20,7 @@ const listData = [
         path: '',
         isTail: true,
     }, {
-        title: '关于人气云',
+        title: '关于启拉云',
         value: '1.0.0',
         path: 'aboutApp',
         isTail: true,

@@ -5257,6 +5257,11 @@ react-native-menu@^0.23.0:
     prop-types "^15.5.10"
     react-timer-mixin "^0.13.3"
 
+react-native-permissions@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npm.taobao.org/react-native-permissions/download/react-native-permissions-1.1.1.tgz#4876004681ff8556454613d85249b01baff9b35b"
+  integrity sha1-SHYARoH/hVZFRhPYUkmwG6/5s1s=
+
 react-native-safe-area-view@^0.14.1:
   version "0.14.5"
   resolved "https://registry.npm.taobao.org/react-native-safe-area-view/download/react-native-safe-area-view-0.14.5.tgz#eeded66bbeb0807f0a7f5f449e7fb2871f7ecf76"

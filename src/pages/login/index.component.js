@@ -43,7 +43,7 @@ export default class Index extends Component {
     doLogin = async () => {
         let result = await _state.login();
         if (result) {
-            this.props.navigation.push('navigator');
+            this.props.navigation.goBack('navigator');
         }
     }
 

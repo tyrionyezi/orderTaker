@@ -48,7 +48,7 @@ class State {
     }
 
 
-    addAccount = () => {
+    addAccount = async () => {
         let url = 'addBuyer';
         let params = this.reqParams;
         console.log(params)
@@ -60,13 +60,15 @@ class State {
             Toast.fail("平台账号不能为空", 2, () => { }, true);
             return
         }
-        http.post(url, params).then((res) => {
-            if (res === 'success') {
-                Toast.success("添加成功", 2, () => { }, true);
-            } else {
-                Toast.success("添加失败", 2, () => { }, true);
-            }
-        })
+        let result = await http.post(url, params);
+        if (result === 'success') {
+            Toast.success("添加成功", 2, () => { }, true);
+            return true;
+        } else {
+            Toast.success(`添加失败，${result}`, 2, () => { }, true);
+            return false;
+        }
+
     };
 
 }
