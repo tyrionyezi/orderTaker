@@ -2,10 +2,14 @@
   package="com.ordertaker">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!--调用摄像头-->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!--录制音频-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+     <!--配置文件到本地-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--读取外部存储器-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
       android:name=".MainApplication"
