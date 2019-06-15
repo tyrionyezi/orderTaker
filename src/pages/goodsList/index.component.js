@@ -30,10 +30,9 @@ export default class Index extends Component {
         _state.initParams(wrap_type);
     }
     onClick = (title) => {
-        this.props.navigation.push('Accont', {
+        this.props.navigation.navigate('addAccount', {
             title: '添加账号',
-            platform: _state.tabIndex,
-            preData: this.preData
+            refresh: _state.getAccountList,
         })
     }
 

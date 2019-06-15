@@ -39,8 +39,8 @@ export default class App extends Component {
             mediaType: 'photo',
             videoQuality: 'high',
             durationLimit: 10,
-            // maxWidth: 300,
-            // maxHeight: 180,
+            maxWidth: 500,
+            maxHeight: 500,
             quality: 0.8,
             angle: 0,
             allowsEditing: false,
@@ -71,6 +71,9 @@ export default class App extends Component {
                 this.setState({
                     avatarSource: source
                 });
+                if (!!this.props.onClick) {
+                    this.props.onClick(response.data);
+                }
             }
         });
     }

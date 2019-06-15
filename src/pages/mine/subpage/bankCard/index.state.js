@@ -4,36 +4,21 @@ import http from './../../../../config/fetch';
 import moment from 'moment';
 
 class State {
-    bankList = [
+    addBank = [
         {
-            title: '章三',
-            value: '642234623423402340009',
-            isTail: false,
-        }, {
-            title: '章三',
-            value: '642234623423402340009',
-            isTail: false,
-        }, {
-            title: '章三',
-            value: '642234623423402340009',
-            isTail: false,
-        }, {
-            title: '章三',
-            value: '642234623423402340009',
-            isTail: false,
-        }, {
-            title: '章三',
-            value: '642234623423402340009',
-            isTail: false,
-        }, {
-            title: '添加银行卡',
-            value: '',
+            title: '暂无银行卡',
+            value: '添加',
             path: 'addbankCard',
             isTail: true,
-        },
+        }
     ]
+    @observable bankList = [];
     @observable name = '';
     @observable idCard = '';
+
+    initParams = () => {
+        this.bankList = [];
+    }
 
     nameChange = (value) => {
         this.name = value
@@ -42,34 +27,51 @@ class State {
     idCardChange = (value) => {
         this.idCard = value
     }
-    /**
-     * 注册张账号
-     */
-    register = async () => {
-        let url = 'register';
+    getBankList = () => {
+        let url = 'getBankList';
         let params = {
-            name: this.name,
-            idCard: this.idCard,
+            id: '',
         };
-        params.name = params.name.trim();
-        params.idCard = params.idCard.trim();
-        console.log(params, 'p')
-        if (params.name === '') {
-            Toast.fail("姓名不能为空", 2, () => { }, true);
-            return
-        }
-        if (params.idCard === '') {
-            Toast.fail("身份证号码", 2, () => { }, true);
-            return
-        }
-        let result = await http.post(url, params);
-        if (result === 'success') {
-            Toast.success(`添加成功`, 1, () => { }, true);
-            return true
-        } else {
-            Toast.fail(`添加失败${result}`, 1, () => { }, true);
-            return false
-        }
+        storage.load({
+            key: 'userInfo',
+            // autoSync: false,
+        }).then((res) => {
+            console.log(res, 'rererererer')
+            params.id = res.id;
+            if (params.id === '') {
+                console.log('222')
+                Toast.fail("请登录", 2, () => { }, true);
+                return
+            }
+            http.post(url, params).then((result) => {
+                let { data = [] } = result;
+                this.processData(result.data);
+            });
+        }).catch((err) => {
+            console.log(err)
+        })
+        // if (result === 'success') {
+        //     Toast.success(`添加成功`, 1, () => { }, true);
+        //     return true
+        // } else {
+        //     Toast.fail(`添加失败${result}`, 1, () => { }, true);
+        //     return false
+        // }
+    }
+
+    processData = (arr = []) => {
+        console.log(arr, 'arr')
+        if (arr.length === 0) this.bankList = [];
+        let data = [];
+        arr.map((item, index) => {
+            data.push({
+                ...item,
+                title: item.deposit,
+                value: item.card,
+                isTail: false
+            })
+        })
+        this.bankList = data;
     }
 
 

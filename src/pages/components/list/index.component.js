@@ -31,6 +31,12 @@ export default class List extends Component {
         }
     }
 
+    onLongPress = (item, index) => {
+        if (this.props.onLongPress) {
+            this.props.onLongPress(item, index)
+        }
+    }
+
     render() {
         let { data = [] } = this.props;
         return (
@@ -43,6 +49,7 @@ export default class List extends Component {
                                 activeOpacity={0.5}
                                 style={_style.itemBox}
                                 onPress={this.onClick.bind(this, item)}
+                                onLongPress={this.onLongPress.bind(this, item, index)}
                             >
                                 <View>
                                     <Text style={_style.titleTxt}>{item.title}</Text>

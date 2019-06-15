@@ -15,6 +15,7 @@ import {
     Alert
 } from 'react-native';
 import { observer } from 'mobx-react';
+import { Modal } from 'antd-mobile-rn';
 import { toJS } from 'mobx';
 import List from './../../../components/list/index.component';
 import _state from './index.state';
@@ -34,10 +35,25 @@ export default class Index extends Component {
         _state.getHasOrderList();
     }
 
+    delete = (item) => {
+        Modal.alert('删除', '', [
+            {
+                text: '取消',
+                onPress: () => console.log('cancel'),
+                style: 'cancel',
+            },
+            { text: '确定', onPress: _state.delete },
+        ]);
+    }
+
     render() {
         return (
             <View style={_style.container}>
-                <List {...this.props} data={toJS(_state.orderList)} />
+                <List
+                    {...this.props}
+                    data={toJS(_state.orderList)}
+                    onLongPress={this.delete}
+                />
             </View>
         )
     }

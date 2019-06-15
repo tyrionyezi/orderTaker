@@ -20,11 +20,13 @@ import Btn from './../../../components/button/index.component';
 import ImagePicker from './../../../components/ImagePicker/index.component';
 import { List, Picker } from 'antd-mobile-rn';
 import _state from './index.state';
+import { bankList } from './index.data'
 
 @observer
 export default class Index extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        _state.initParams();
     }
     render() {
         return (
@@ -49,26 +51,15 @@ export default class Index extends Component {
                             placeholder='请输入银行卡号'
                             autoCapitalize={'none'}
                             style={[_style.textInput]}
-                            value={_state.idCard}
-                            onChangeText={_state.idCardChange}
+                            value={_state.card}
+                            onChangeText={_state.cardChange}
                         />
                     </View>
                     <Picker
-                        data={[
-                            {
-                                label: '中国工商银行',
-                                value: '1'
-                            }, {
-                                label: '中国工商银行',
-                                value: '1'
-                            }, {
-                                label: '中国工商银行',
-                                value: '1'
-                            },
-                        ]}
+                        data={bankList}
                         cols={1}
-                        value={[]}
-                        onChange={() => { }}
+                        value={_state.depositBank}
+                        onChange={_state.depositChange}
                     >
                         <List.Item style={{ paddingLeft: -10, fontSize: 14, justifyContent: 'space-between' }} arrow="horizontal" onPress={this.onPress}>
                             开户银行
@@ -76,15 +67,17 @@ export default class Index extends Component {
                     </Picker>
                     <View style={_style.imagePicker}>
                         <Text style={{ height: 30 }}>银行卡正面照片</Text>
+
                         <ImagePicker
                             type='1'
                             width={300}
                             height={180}
                             borderRadius={10}
+                            onClick={_state.getBankCardPic}
                         />
                     </View>
                     <View>
-                        <Btn txt={'提交'} />
+                        <Btn txt={'提交'} onClick={_state.addBank} />
                     </View>
                 </ScrollView>
             </View>

@@ -16,6 +16,7 @@ import {
     Alert
 } from 'react-native';
 import { observer } from 'mobx-react';
+import { toJS } from 'mobx';
 import Btn from './../../../components/button/index.component';
 import ImagePicker from './../../../components/ImagePicker/index.component';
 import _state from './index.state';
@@ -23,7 +24,11 @@ import _state from './index.state';
 @observer
 export default class Index extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        _state.initParams();
+    }
+    componentDidMount() {
+        _state.getCertificationList();
     }
     render() {
         return (
@@ -39,6 +44,7 @@ export default class Index extends Component {
                             style={[_style.textInput]}
                             value={_state.name}
                             autoFocus={true}
+                            editable={_state.idCardStatus === 0 ? true : false}
                             onChangeText={_state.nameChange}
                         />
                     </View>
@@ -47,6 +53,7 @@ export default class Index extends Component {
                         <TextInput
                             placeholder='请输入身份证号码'
                             autoCapitalize={'none'}
+                            editable={_state.idCardStatus === 0 ? true : false}
                             style={[_style.textInput]}
                             value={_state.idCard}
                             onChangeText={_state.idCardChange}
@@ -54,25 +61,48 @@ export default class Index extends Component {
                     </View>
                     <View style={_style.imagePicker}>
                         <Text style={{ height: 30 }}>证件照片</Text>
-                        <ImagePicker
-                            width={300}
-                            height={180}
-                            borderRadius={10}
-                            type='1'
-                        />
-                        <ImagePicker
-                            width={300}
-                            height={180}
-                            borderRadius={10}
-                            type='1'
-                        />
+                        {
+                            _state.idCardStatus === 0 ?
+                                <ImagePicker
+                                    width={300}
+                                    height={180}
+                                    borderRadius={10}
+                                    type='1'
+                                    onClick={_state.getIdCardFrontPic}
+                                />
+                                :
+                                <Image style={{ width: 300, height: 180 }} source={{ uri: 'data:image/jpeg;base64,' + toJS(_state.pic_front) }} />
+                        }
+
+                        {
+                            _state.idCardStatus === 0 ?
+                                <ImagePicker
+                                    width={300}
+                                    height={180}
+                                    borderRadius={10}
+                                    type='1'
+                                    onClick={_state.getIdCardBackPic}
+                                />
+                                :
+                                <Image style={{ width: 300, height: 180, borderRadius: 10 }} source={{ uri: 'data:image/jpeg;base64,' + toJS(_state.pic_back) }} />
+                        }
                     </View>
                     <View style={_style.statusBox}>
                         <Text>审核状态</Text>
-                        <Text>未完成</Text>
+                        <Text>{_state.statusTxt[_state.idCardStatus]}</Text>
                     </View>
+                    {
+                        _state.idCardStatus === 3 ?
+                            <View style={_style.statusBox}>
+                                <Text>问题描述</Text>
+                                <Text>{_state.desc}</Text>
+                            </View>
+                            :
+                            null
+                    }
+
                     <View>
-                        <Btn txt={'提交'} />
+                        <Btn txt={'提交'} onClick={_state.addCertification} />
                     </View>
                 </ScrollView>
             </View>

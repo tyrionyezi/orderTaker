@@ -28,16 +28,24 @@ export default class Index extends Component {
 
     updatePassword = () => {
         let url = 'reset';
-        let params = {
-            old_password: this.state.oldPwd,
-            new_password: this.state.newPwd,
-        }
-        if (!params.old_password || !params.new_password) {
-            Toast.fail("不能为空", 2, () => { }, true)
-            return
-        }
-        Http.post(url, params).then((res) => {
-            console.log(res, 'rrrr')
+        storage.load({
+            key: 'userInfo',
+        }).then((res, index) => {
+            let params = {
+                tel: res.tel,
+                old_password: this.state.oldPwd,
+                new_password: this.state.newPwd,
+            }
+            if (!params.old_password || !params.new_password) {
+                Toast.fail("不能为空", 2, () => { }, true)
+                return
+            }
+            Http.post(url, params).then((res) => {
+                if (res === 'success') {
+                    this.props.navigation.pop();
+                    Toast.fail("修改成功", 2, () => { }, true)
+                }
+            })
         })
     }
 

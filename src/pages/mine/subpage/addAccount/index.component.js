@@ -15,7 +15,7 @@ import { List, Picker, DatePicker, InputItem } from 'antd-mobile-rn';
 import { observer } from 'mobx-react';
 const { height, width } = Dimensions.get('window');
 import _state from './index.state';
-import data from './index.data';
+import data from './../../../data/provinces';
 
 @observer
 export default class Index extends Component {
@@ -25,21 +25,31 @@ export default class Index extends Component {
         _state.initParams(this.rootInfo);
     }
 
-
-    submit = async () => {
-        let result = await _state.addAccount();
-        if (result) {
-            this.props.navigation.replace('GoodsList', {
-                data: this.rootInfo.preData,
-            })
-        }
-    }
-
     render() {
+        let platformData = [
+            {
+                label: '天猫/淘宝',
+                value: '0'
+            }, {
+                label: '京东',
+                value: '1'
+            }, {
+                label: '拼多多',
+                value: '2'
+            },
+        ]
         return (
             <View style={_style.container}>
                 <View style={_style.formBox}>
                     <List>
+                        <Picker
+                            data={platformData}
+                            cols={1}
+                            value={_state.addFileds.platform}
+                            onOk={(platform) => _state.setAddFiledsValue('platform', platform)}
+                        >
+                            <List.Item arrow="horizontal" style={_style.label}>平台</List.Item>
+                        </Picker>
                         <InputItem
                             clear
                             value={_state.addFileds.name}
@@ -138,7 +148,7 @@ export default class Index extends Component {
                         </InputItem>
                     </List>
                 </View>
-                <View style={_style.btnContainer}>
+                <View style={_style.addAccount}>
                     <TouchableOpacity
                         style={_style.btnBox}
                         activeOpacity={0.5}

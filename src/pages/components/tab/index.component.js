@@ -60,6 +60,9 @@ const _style = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
+        borderWidth: 0,
+        borderBottomWidth: 1,
+        borderBottomColor: '#b9b4b49c',
         backgroundColor: '#fff',
     },
     itemBox: {
@@ -68,7 +71,7 @@ const _style = StyleSheet.create({
         height: 50,
         borderWidth: 0,
         borderBottomWidth: 2,
-        borderBottomColor: '#fff',
+        borderBottomColor: 'transparent',
     },
     activeItemBox: {
         borderBottomColor: '#058efb',

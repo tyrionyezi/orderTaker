@@ -1,9 +1,11 @@
 import { observable, action, toJS } from 'mobx';
 import { Toast } from 'antd-mobile-rn';
-import http from './../../config/fetch';
+import NavigationService from './../../../../config/NavigationService';
+import http from './../../../../config/fetch';
 import moment from 'moment';
 
 class State {
+    rootInfo = {};
     @observable addFileds = {
         name: '',
         sex: '',
@@ -18,7 +20,12 @@ class State {
     }
 
     initParams = (params) => {
-        this.reqParams['platform'] = params.platform;
+        this.rootInfo = params;
+    }
+
+    back = () => {
+        this.rootInfo.refresh();
+        NavigationService.back();
     }
 
     reqParams = {
@@ -48,7 +55,7 @@ class State {
     }
 
 
-    addAccount = async () => {
+    updateBuyer = async () => {
         let url = 'addBuyer';
         let params = this.reqParams;
         console.log(params)
@@ -63,7 +70,8 @@ class State {
         let result = await http.post(url, params);
         if (result === 'success') {
             Toast.success("添加成功", 2, () => { }, true);
-            return true;
+            NavigationService.back();
+            this.rootInfo.refresh();
         } else {
             Toast.success(`添加失败，${result}`, 2, () => { }, true);
             return false;

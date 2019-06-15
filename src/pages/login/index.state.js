@@ -50,6 +50,10 @@ class State {
         if (result.success === 'true') {
             storage.save({
                 key: 'loginInfo',
+                data: params
+            });
+            storage.save({
+                key: 'userInfo',
                 data: result.info
             });
             Toast.success(`登陆成功`, 1, () => { }, true);

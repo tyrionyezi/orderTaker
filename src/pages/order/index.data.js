@@ -13,7 +13,7 @@ const card1Data = [
         icon: states,
         title: '已完成',
         value: 2,
-        path: 'GoodsList',
+        path: 'doneOrder',
     },
 ];
 
@@ -27,7 +27,7 @@ const card2Data = [
         icon: patreon,
         title: '已完成',
         value: '2',
-        path: 'orderList',
+        path: 'doneOrder',
     },
 ]
 

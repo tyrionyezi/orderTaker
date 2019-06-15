@@ -60,14 +60,5 @@ class State {
         })
         this.orderList = data;
     }
-
-    delete = (item) => {
-        let url = '';
-        let params = {}
-        http.post(url, params).then((res) => {
-            let { data = [] } = res;
-            this.processOrderListData(data);
-        })
-    }
 }
 export default new State()
