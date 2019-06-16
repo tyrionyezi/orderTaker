@@ -14,9 +14,10 @@ import {
     DeviceEventEmitter,
     Alert
 } from 'react-native';
-
+import { observer } from 'mobx-react';
 import List from './../../../components/list/index.component';
-import { accountInfo } from './../../index.data';
+import _state from './index.state'
+@observer
 export default class Index extends Component {
     constructor(props) {
         super(props)
@@ -29,10 +30,15 @@ export default class Index extends Component {
         this.props.navigation.replace('login');
     }
 
+    componentDidMount() {
+        _state.getUserInfo();
+    }
+
     render() {
+        let { userInfo } = _state;
         return (
             <View style={_style.container}>
-                <List {...this.props} data={accountInfo}></List>
+                <List {...this.props} data={userInfo}></List>
                 <TouchableOpacity
                     style={_style.logout}
                     activeOpacity={0.5}

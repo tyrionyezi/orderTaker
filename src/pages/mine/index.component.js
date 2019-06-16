@@ -15,11 +15,10 @@ import {
     Alert
 } from 'react-native';
 import { observer } from 'mobx-react';
-import { NoticeBar, Toast, Button } from 'antd-mobile-rn';
 import Header from './components/header/index.component';
 import List from './../components/list/index.component';
-
 import { listData } from './index.data';
+import _state from './index.state';
 @observer
 export default class Index extends Component {
     constructor(props) {
@@ -28,9 +27,14 @@ export default class Index extends Component {
 
     toAccountInfo = () => {
         this.props.navigation.push('accountInfo')
+    };
+    componentDidMount() {
+        _state.getUserInfo();
     }
 
+
     render() {
+        let { userInfo } = _state;
         return (
             <View style={_style.container}>
                 <Header />
@@ -42,7 +46,7 @@ export default class Index extends Component {
                     <View style={_style.leftBox}>
                         <Image style={_style.headIcon} source={require('./../../asset/headIcon.png')} />
                         <View>
-                            <Text>章三</Text>
+                            <Text>{userInfo.name}</Text>
                         </View>
                     </View>
                     <View>

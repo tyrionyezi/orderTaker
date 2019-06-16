@@ -27,40 +27,6 @@ const listData = [
     },
 ]
 
-const accountInfo = [
-    {
-        title: '头像',
-        value: '',
-        isTail: false,
-    }, {
-        title: 'Id',
-        value: '131231',
-        isTail: false,
-    }, {
-        title: '账号',
-        value: '1323123',
-        isTail: false,
-    }, {
-        title: '账号密码',
-        value: '',
-        isTail: true,
-        path: 'updatePassword',
-    }, {
-        title: '登录历史',
-        value: '',
-        isTail: false,
-    }, {
-        title: 'QQ账号',
-        value: '312312',
-        isTail: false,
-    }, {
-        title: '微信',
-        value: '',
-        isTail: false,
-    },
-]
-
 export {
     listData,
-    accountInfo
 }
