@@ -77,7 +77,7 @@ export default Routes = {
     doneOrder: {
         screen: DoneOrder, //垫付任务详情
         navigationOptions: ({ navigation }) => ({
-            title: '垫付任务详情',
+            title: navigation.state.params.data.navTitle,
         }),
     },
 

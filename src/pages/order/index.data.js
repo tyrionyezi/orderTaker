@@ -14,6 +14,7 @@ const card1Data = [
         title: '已完成',
         value: 2,
         path: 'doneOrder',
+        navTitle: '浏览已完成',
     },
 ];
 
@@ -28,6 +29,7 @@ const card2Data = [
         title: '已完成',
         value: '2',
         path: 'doneOrder',
+        navTitle: '垫付已完成',
     },
 ]
 
