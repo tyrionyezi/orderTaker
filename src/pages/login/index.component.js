@@ -143,7 +143,7 @@ const _style = StyleSheet.create({
         paddingBottom: 15,
         position: 'absolute',
         right: 0,
-        bottom: 0
+        bottom: 20
     },
     text: {
         color: '#1598ff87',

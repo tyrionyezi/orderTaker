@@ -8,13 +8,14 @@ const cardBoxData = [
         icon: guide,
         title: '新手指导',
         value: '0',
-        path: 'GuideList'
+        path: 'rookie'
+    }, {
+        icon: waiter,
+        title: '在线客服',
+        value: '1',
+        path: 'customerService'
     },
     // {
-    //     icon: waiter,
-    //     title: '在线客服',
-    //     value: '0',
-    // }, {
     //     icon: share,
     //     title: '邀请好友',
     //     value: '0',

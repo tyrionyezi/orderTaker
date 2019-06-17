@@ -1,6 +1,6 @@
 import Login from './../pages/login/index.component';
 import Register from './../pages/register/index.component';
-import GuideList from './../pages/guideList/index.component';
+import Rookie from '../pages/guide/rookie/index.component';
 import HelpDoc from './../pages/helpDoc/index.component';
 import GoodsList from './../pages/goodsList/index.component';
 import Authentiacion from './../pages/mine/subpage/authentication/index.component';
@@ -17,6 +17,10 @@ import AccountMange from './../pages/mine/subpage/accountManage/index.component'
 import AddbankCard from './../pages/mine/subpage/addBankCard/index.component';
 import UpdateAccount from './../pages/mine/subpage/updateAccount/index.component';
 import AddAccount from './../pages/mine/subpage/addAccount/index.component';
+import Wallet from './../pages/mine/subpage/wallet/index.component';
+import Withdraw from './../pages/mine/subpage/withdraw/index.component';
+import WithdrawRecord from './../pages/mine/subpage/withdrawRecord/index.component';
+import CustomerService from './../pages/guide/customerService/index.component';
 export default Routes = {
     login: {
         screen: Login,
@@ -30,8 +34,8 @@ export default Routes = {
             header: null,
         }
     },
-    GuideList: {
-        screen: GuideList,
+    rookie: {
+        screen: Rookie,
         navigationOptions: ({ navigation }) => ({
             title: navigation.state.params.data.title,
         }),
@@ -134,6 +138,30 @@ export default Routes = {
         screen: AddbankCard, //银行卡
         navigationOptions: ({ navigation }) => ({
             title: '添加银行卡'
+        }),
+    },
+    wallet: {
+        screen: Wallet, //银行卡
+        navigationOptions: ({ navigation }) => ({
+            title: navigation.state.params.data.title,
+        }),
+    },
+    withdraw: {
+        screen: Withdraw, //银行卡
+        navigationOptions: ({ navigation }) => ({
+            title: navigation.state.params.data.title,
+        }),
+    },
+    withdrawRecord: {
+        screen: WithdrawRecord, //银行卡
+        navigationOptions: ({ navigation }) => ({
+            title: navigation.state.params.data.title,
+        }),
+    },
+    customerService: {
+        screen: CustomerService, //银行卡
+        navigationOptions: ({ navigation }) => ({
+            title: navigation.state.params.data.title,
         }),
     },
 }

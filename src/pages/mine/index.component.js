@@ -25,7 +25,7 @@ export default class Index extends Component {
         super(props)
     }
 
-    toAccountInfo = () => {
+    toWallet = () => {
         this.props.navigation.push('accountInfo')
     };
     componentDidMount() {
@@ -37,11 +37,11 @@ export default class Index extends Component {
         let { userInfo } = _state;
         return (
             <View style={_style.container}>
-                <Header />
+                <Header {...this.props} />
                 <TouchableOpacity
                     activeOpacity={0.5}
                     style={_style.userInfoBox}
-                    onPress={this.toAccountInfo}
+                    onPress={this.toWallet}
                 >
                     <View style={_style.leftBox}>
                         <Image style={_style.headIcon} source={require('./../../asset/headIcon.png')} />

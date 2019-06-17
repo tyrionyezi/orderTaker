@@ -1,12 +1,12 @@
 const guideList = [
     {
         title: '新手指导',
-        path: 'GuideList',
+        path: 'rookie',
         isTail: true,
     }, {
         title: '客服电话',
         value: '110',
-        path: 'GuideList',
+        path: 'rookie',
         isTail: false,
     },
     // {

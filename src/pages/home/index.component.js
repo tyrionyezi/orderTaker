@@ -19,7 +19,8 @@ import { observer } from 'mobx-react';
 import Header from './components/header/index.component';
 import CardBox from './components/cardBox/index.component';
 import PermissionAndroidViewComponent from './../components/PermissionAndroidView/index'
-import { cardBoxData } from './index.data'
+import { cardBoxData } from './index.data';
+import _state from './index.state'
 @observer
 export default class Home extends Component {
     constructor(props) {
@@ -27,15 +28,18 @@ export default class Home extends Component {
     }
 
     onClick = () => {
-        this.props.navigation.push('GuideList', {
+        this.props.navigation.push('rookie', {
             data: { title: '新手指南' },
         })
+    }
+    componentDidMount = () => {
+        _state.getUserInfo();
     }
 
     render() {
         return (
             <View style={_style.main}>
-                <Header />
+                <Header data={_state.userInfo} />
                 {Platform.OS == 'android' && <PermissionAndroidViewComponent {...this.props} />}
                 <TouchableOpacity
                     activeOpacity={0.5}

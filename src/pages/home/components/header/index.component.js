@@ -9,26 +9,32 @@ import {
     TouchableOpacity,
     Dimensions,
 } from 'react-native';
+import PropTypes from 'prop-types';
 const { height, width } = Dimensions.get('window');
 export default class Index extends Component {
     constructor(props) {
         super(props)
     }
 
+    static propTypes = {
+        data: PropTypes.object
+    }
+
     render() {
+        let { data = {} } = this.props
         return (
             <View style={_style.box}>
                 <View style={_style.top}>
                     <View>
                         <Text style={[_style.fontColor, _style.label]}>我的金币</Text>
-                        <Text style={[_style.fontColor, _style.value]}>18.33</Text>
+                        <Text style={[_style.fontColor, _style.value]}>{data.cion}</Text>
                     </View>
                     <View>
                         <Text style={[_style.fontColor, _style.label, { textAlign: 'right' }]}>我的本金</Text>
-                        <Text style={[_style.fontColor, _style.value, { textAlign: 'right' }]}>0</Text>
+                        <Text style={[_style.fontColor, _style.value, { textAlign: 'right' }]}>{data.principal}</Text>
                     </View>
                 </View>
-                <View style={_style.bottom}>
+                {/* <View style={_style.bottom}>
                     <View>
                         <Text style={[_style.fontColor, _style.bottomTxt]}>{`今日预估收入：${0}`}</Text>
                         <Text style={[_style.fontColor, _style.bottomTxt]}>{`待完成总收入：${0}`}</Text>
@@ -37,7 +43,7 @@ export default class Index extends Component {
                         <Text style={[_style.fontColor, _style.bottomTxt, { textAlign: 'right' }]}>{`未返本金：${0}`}</Text>
                         <Text style={[_style.fontColor, _style.bottomTxt, { textAlign: 'right' }]}>{`今日奖励：${1.3}`}</Text>
                     </View>
-                </View>
+                </View> */}
             </View>
         )
     }

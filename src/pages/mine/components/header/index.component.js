@@ -24,18 +24,31 @@ export default class Header extends Component {
         super(props)
     }
 
+    //提现
+
+    getMoney = (data) => {
+        this.props.navigation.push('wallet', {
+            data: data
+        })
+    }
+
 
     render() {
         return (
             <View style={_style.headerBox}>
-                <View style={{ alignItems: 'center' }}>
+                <TouchableOpacity
+                    style={{ alignItems: 'center' }}
+                >
                     <Image style={{ height: 25, width: 25 }} source={require('./../../../../asset/¥.png')} />
                     <Text style={_style.tilteTxt}>{`金币：${10}`}</Text>
-                </View>
-                <View style={{ alignItems: 'center' }}>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{ alignItems: 'center' }}
+                    onPress={this.getMoney.bind(this, { title: '本金提现' })}
+                >
                     <Image style={{ height: 25, width: 25 }} source={require('./../../../../asset/purse.png')} />
                     <Text style={_style.tilteTxt}>{`本金：${10}`}</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         )
     }

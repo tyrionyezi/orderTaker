@@ -31,11 +31,11 @@ export default class Index extends Component {
                             return (
                                 <TouchableOpacity key={`t${index}`} activeOpacity={0.5} style={_style.itemBox} onPress={this.onClick.bind(this, item)}>
                                     <View style={_style.leftBox}>
-                                        <Image style={_style.leftIcon} source={require('./../../asset/plane.png')} />
+                                        <Image style={_style.leftIcon} source={require('./../../../asset/plane.png')} />
                                         <Text>{item.title}</Text>
                                     </View>
                                     <View>
-                                        <Image style={_style.rightIcon} source={require('./../../asset/rightArrow.png')} />
+                                        <Image style={_style.rightIcon} source={require('./../../../asset/rightArrow.png')} />
                                     </View>
                                 </TouchableOpacity>
                             )
