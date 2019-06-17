@@ -69,7 +69,6 @@ class State {
             platform: this.tabIndex,
         };
         http.post(url, params).then((res) => {
-            console.log('getTaskListgetTaskList', res)
             let { data } = res;
             this.dataList = data;
         })
@@ -111,6 +110,7 @@ class State {
     @action tabChange = (item, index) => {
         this.tabIndex = item.value;
         this.setCurrnetPlatformAccount();
+        this.getTaskList();
     }
 
     /**
@@ -118,21 +118,29 @@ class State {
      * @param
      */
     receiveOrder = (item) => {
-        let url = 'orderReceiving';
-        let params = {
-            serial: item.serial,
-            buyer: toJS(this.currentPlatformAccount).id,
-            id: 20
-        }
-        if (params.id === '') {
-            Toast.fail("请登录", 2, () => { }, true);
-            return
-        }
-        http.post(url, params).then((res) => {
-            if (res === 'sucess') {
-                Toast.success("接单成功", 2, () => { }, true);
-                this.getTaskList();
+        storage.load({
+            key: 'userInfo',
+        }).then((res) => {
+            let url = 'orderReceiving';
+            let params = {
+                serial: item.serial,
+                buyer: toJS(this.currentPlatformAccount).id,
+                id: res.id,
             }
+            if (params.id === '') {
+                Toast.fail("请登录", 2, () => { }, true);
+                return
+            }
+            if (params.buyer === '') {
+                Toast.fail("请添加的买手信息", 2, () => { }, true);
+                return
+            }
+            http.post(url, params).then((res) => {
+                if (res === 'sucess') {
+                    Toast.success("接单成功", 2, () => { }, true);
+                    this.getTaskList();
+                }
+            })
         })
     }
 
