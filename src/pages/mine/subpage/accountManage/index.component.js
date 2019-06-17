@@ -46,14 +46,14 @@ export default class Index extends Component {
         })
     }
 
-    delete = () => {
+    delete = (item) => {
         Modal.alert('删除', '', [
             {
                 text: '取消',
                 onPress: () => console.log('cancel'),
                 style: 'cancel',
             },
-            { text: '确定', onPress: () => console.log('ok') },
+            { text: '确定', onPress: _state.delete(item) },
         ]);
     }
 

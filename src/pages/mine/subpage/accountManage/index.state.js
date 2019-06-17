@@ -1,5 +1,5 @@
 import { observable, action, toJS } from 'mobx';
-import { Toast } from 'antd-mobile-rn';
+import { Toast, Result } from 'antd-mobile-rn';
 import http from './../../../../config/fetch';
 import moment from 'moment';
 
@@ -14,13 +14,19 @@ class State {
      * 获取买手账号列表
      */
     getBuyerList = () => {
-        let url = 'getBuyerList';
-        let params = {
-            id: 20
-        };
-        http.post(url, params).then((res) => {
-            let { data } = res;
-            this.progressData(data);
+        storage.load({
+            key: 'userInfo'
+        }).then((res) => {
+            let url = 'getBuyerList';
+            let params = {
+                id: res.id,
+            };
+            http.post(url, params).then((res) => {
+                let { data } = res;
+                this.progressData(data);
+            })
+        }).catch((err) => {
+            console.log(err)
         })
     }
 
@@ -41,7 +47,7 @@ class State {
             data.push(_arr);
         }
 
-        this.dataList = data;
+        this.dataList = [];
     }
 
     setCurrentListData = (item, index) => {
@@ -49,10 +55,19 @@ class State {
     }
 
     delete = (item) => {
-        console.log
-    }
-    test = () => {
-        console.log('hhh')
+        let url = 'deleteBuyer';
+        let params = {
+            id: item.id
+        };
+        http.post(url, params).then((res) => {
+            let { data } = res;
+            if (data.status === 'success') {
+                Toast.success("删除成功", 2, () => { }, true);
+                this.getBuyerList();
+            } else {
+                Toast.fail("删除失败", 2, () => { }, true);
+            }
+        })
     }
 
 }
