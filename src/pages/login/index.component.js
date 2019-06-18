@@ -8,6 +8,7 @@ import {
     View,
     TextInput,
     Text,
+    KeyboardAvoidingView,
     TouchableOpacity,
     Dimensions,
 } from 'react-native';
@@ -52,41 +53,43 @@ export default class Index extends Component {
     render() {
         return (
             <View style={_style.contianer}>
-                <View style={_style.loginBox}>
-                    <View style={_style.layout}>
-                        <Image style={_style.icon} source={require('./../../asset/login.png')} />
-                        <TextInput
-                            placeholder='手机号'
-                            keyboardType={'numeric'}
-                            autoCapitalize={'none'}
-                            autoComplete={'tel'}
-                            style={[_style.textInput, this.state.tel ? _style.onFoucs : {}]}
-                            value={_state.tel}
-                            autoFocus={true}
-                            onFocus={this.telOnFocus}
-                            onBlur={this.telOnFocus}
-                            onChangeText={_state.telChange}
-                        />
+                <KeyboardAvoidingView>
+                    <View style={_style.loginBox}>
+                        <View style={_style.layout}>
+                            <Image style={_style.icon} source={require('./../../asset/login.png')} />
+                            <TextInput
+                                placeholder='手机号'
+                                keyboardType={'numeric'}
+                                autoCapitalize={'none'}
+                                autoComplete={'tel'}
+                                style={[_style.textInput, this.state.tel ? _style.onFoucs : {}]}
+                                value={_state.tel}
+                                autoFocus={true}
+                                onFocus={this.telOnFocus}
+                                onBlur={this.telOnFocus}
+                                onChangeText={_state.telChange}
+                            />
+                        </View>
+                        <View style={_style.layout}>
+                            <Image style={_style.icon} source={require('./../../asset/password.png')} />
+                            <TextInput
+                                autoCapitalize={'none'}
+                                placeholder='密码'
+                                keyboardType={'default'}
+                                secureTextEntry={true}
+                                autoComplete={'password'}
+                                style={[_style.textInput, this.state.password ? _style.onFoucs : {}]}
+                                value={_state.password}
+                                onFocus={this.passwordOnFocus}
+                                onBlur={this.passwordOnFocus}
+                                onChangeText={_state.pwdChange}
+                            />
+                        </View>
+                        <View style={_style.btnBox}>
+                            <Btn txt={'登陆'} onClick={this.doLogin} />
+                        </View>
                     </View>
-                    <View style={_style.layout}>
-                        <Image style={_style.icon} source={require('./../../asset/password.png')} />
-                        <TextInput
-                            autoCapitalize={'none'}
-                            placeholder='密码'
-                            keyboardType={'default'}
-                            secureTextEntry={true}
-                            autoComplete={'password'}
-                            style={[_style.textInput, this.state.password ? _style.onFoucs : {}]}
-                            value={_state.password}
-                            onFocus={this.passwordOnFocus}
-                            onBlur={this.passwordOnFocus}
-                            onChangeText={_state.pwdChange}
-                        />
-                    </View>
-                    <View style={_style.btnBox}>
-                        <Btn txt={'登陆'} onClick={this.doLogin} />
-                    </View>
-                </View>
+                </KeyboardAvoidingView>
                 <View style={_style.info}>
                     <Text
                         onPress={this.link}

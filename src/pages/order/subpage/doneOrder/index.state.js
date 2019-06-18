@@ -16,13 +16,23 @@ class State {
 
     @observable orderList = [];
 
+    getUserInfo = () => {
+        storage.load({
+            key: 'userInfo'
+        }).then((res) => {
+            this.getHasOrderList(res.id);
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     /**
      * 获取订单列表
      */
-    getHasOrderList = () => {
+    getHasOrderList = (id) => {
         let url = 'orderHas';
         let params = {
-            id: 20,
+            id: id,
             wrap_type: this.rootInfo.wrap_type,
             status: this.rootInfo.status,
         };

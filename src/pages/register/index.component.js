@@ -6,6 +6,7 @@ import {
     ScrollView,
     Image,
     View,
+    KeyboardAvoidingView,
     TextInput,
     Text,
     TouchableOpacity,
@@ -57,62 +58,63 @@ export default class Index extends Component {
     render() {
         return (
             <View style={_style.contianer}>
-                <View style={_style.loginBox}>
-                    <View style={_style.layout}>
-                        <Text style={_style.titleTxt}>手机号</Text>
-                        <TextInput
-                            placeholder='请输入手机号'
-                            keyboardType={'numeric'}
-                            autoCapitalize={'none'}
-                            autoComplete={'tel'}
-                            style={[_style.textInput, this.state.tel ? _style.onFoucs : {}]}
-                            value={_state.tel}
-                            autoFocus={true}
-                            onFocus={this.telOnFocus}
-                            onBlur={this.telOnFocus}
-                            onChangeText={_state.telChange}
-                        />
-                    </View>
-                    <View style={_style.layout}>
-                        <Text style={_style.titleTxt}>账户名</Text>
-                        <TextInput
-                            placeholder='请输入账户名'
-                            autoCapitalize={'none'}
-                            style={[_style.textInput, this.state.name ? _style.onFoucs : {}]}
-                            value={_state.name}
-                            onFocus={this.nameOnFocus}
-                            onBlur={this.nameOnFocus}
-                            onChangeText={_state.nameChange}
-                        />
-                    </View>
-                    <View style={_style.layout}>
-                        <Text style={_style.titleTxt}>邮箱</Text>
-                        <TextInput
-                            placeholder='请输入邮箱'
-                            autoCapitalize={'none'}
-                            style={[_style.textInput, this.state.email ? _style.onFoucs : {}]}
-                            value={_state.email}
-                            onFocus={this.emailOnFocus}
-                            onBlur={this.emailOnFocus}
-                            onChangeText={_state.emailChange}
-                        />
-                    </View>
-                    <View style={_style.layout}>
-                        <Text style={_style.titleTxt}>密码</Text>
-                        <TextInput
-                            autoCapitalize={'none'}
-                            placeholder='请输入密码'
-                            keyboardType={'default'}
-                            secureTextEntry={true}
-                            autoComplete={'password'}
-                            style={[_style.textInput, this.state.password ? _style.onFoucs : {}]}
-                            value={_state.password}
-                            onFocus={this.passwordOnFocus}
-                            onBlur={this.passwordOnFocus}
-                            onChangeText={_state.pwdChange}
-                        />
-                    </View>
-                    {/* <View style={_style.layout}>
+                <KeyboardAvoidingView>
+                    <View style={_style.loginBox}>
+                        <View style={_style.layout}>
+                            <Text style={_style.titleTxt}>手机号</Text>
+                            <TextInput
+                                placeholder='请输入手机号'
+                                keyboardType={'numeric'}
+                                autoCapitalize={'none'}
+                                autoComplete={'tel'}
+                                style={[_style.textInput, this.state.tel ? _style.onFoucs : {}]}
+                                value={_state.tel}
+                                autoFocus={true}
+                                onFocus={this.telOnFocus}
+                                onBlur={this.telOnFocus}
+                                onChangeText={_state.telChange}
+                            />
+                        </View>
+                        <View style={_style.layout}>
+                            <Text style={_style.titleTxt}>账户名</Text>
+                            <TextInput
+                                placeholder='请输入账户名'
+                                autoCapitalize={'none'}
+                                style={[_style.textInput, this.state.name ? _style.onFoucs : {}]}
+                                value={_state.name}
+                                onFocus={this.nameOnFocus}
+                                onBlur={this.nameOnFocus}
+                                onChangeText={_state.nameChange}
+                            />
+                        </View>
+                        <View style={_style.layout}>
+                            <Text style={_style.titleTxt}>邮箱</Text>
+                            <TextInput
+                                placeholder='请输入邮箱'
+                                autoCapitalize={'none'}
+                                style={[_style.textInput, this.state.email ? _style.onFoucs : {}]}
+                                value={_state.email}
+                                onFocus={this.emailOnFocus}
+                                onBlur={this.emailOnFocus}
+                                onChangeText={_state.emailChange}
+                            />
+                        </View>
+                        <View style={_style.layout}>
+                            <Text style={_style.titleTxt}>密码</Text>
+                            <TextInput
+                                autoCapitalize={'none'}
+                                placeholder='请输入密码'
+                                keyboardType={'default'}
+                                secureTextEntry={true}
+                                autoComplete={'password'}
+                                style={[_style.textInput, this.state.password ? _style.onFoucs : {}]}
+                                value={_state.password}
+                                onFocus={this.passwordOnFocus}
+                                onBlur={this.passwordOnFocus}
+                                onChangeText={_state.pwdChange}
+                            />
+                        </View>
+                        {/* <View style={_style.layout}>
                         <Text style={_style.titleTxt}>确认密码</Text>
                         <TextInput
                             autoCapitalize={'none'}
@@ -127,10 +129,11 @@ export default class Index extends Component {
                             onChangeText={_state.pwdChange}
                         />
                     </View> */}
-                    <View style={_style.btnBox}>
-                        <Btn txt={'注册'} onClick={this.doRegister} />
+                        <View style={_style.btnBox}>
+                            <Btn txt={'注册'} onClick={this.doRegister} />
+                        </View>
                     </View>
-                </View>
+                </KeyboardAvoidingView>
                 <View style={_style.info}>
                     <Text
                         onPress={this.link}

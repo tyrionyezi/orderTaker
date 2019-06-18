@@ -32,18 +32,22 @@ export default class Index extends Component {
 
 
     componentDidMount() {
-        _state.getHasOrderList();
+        _state.getUserInfo();
     }
 
     delete = (item) => {
-        Modal.alert('删除', '', [
+        Modal.alert('取消订单', '', [
             {
                 text: '取消',
                 onPress: () => console.log('cancel'),
                 style: 'cancel',
             },
-            { text: '确定', onPress: _state.delete },
+            { text: '确定', onPress: _state.cancelOrder(item) },
         ]);
+    }
+
+    componentWillUnmount() {
+        _state.orderList = [];
     }
 
     render() {

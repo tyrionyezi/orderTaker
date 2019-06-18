@@ -31,7 +31,7 @@ export default class Index extends Component {
 
 
     componentDidMount() {
-        // _state.getHasOrderList();
+        _state.getUserInfo();
     }
 
     render() {

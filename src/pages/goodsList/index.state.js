@@ -5,6 +5,7 @@ import moment from 'moment';
 
 class State {
 
+    userInfo = {};
     //初始化参数
     initParams = (type) => {
         this.tabIndex = 0;
@@ -21,7 +22,19 @@ class State {
         };
         this.currentPlatformAccount = {};
         this.rootInfo.wrap_type = type;
+        this.getUserInfo();
     };
+
+    getUserInfo = () => {
+        storage.load({
+            key: 'userInfo'
+        }).then((res) => {
+            this.userInfo = res;
+            this.getAccountList();
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
     rootInfo = {
         wrap_type: 1,
@@ -83,7 +96,7 @@ class State {
     getAccountList = () => {
         let url = 'getBuyerList';
         let params = {
-            id: 20
+            id: this.userInfo.id
         }
         if (params.id === '') {
             return

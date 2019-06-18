@@ -1,17 +1,28 @@
 import { observable, action, toJS } from 'mobx';
-import { Toast } from 'antd-mobile-rn';
+import { Toast, Result } from 'antd-mobile-rn';
 import http from './../../../../config/fetch';
 import moment from 'moment';
 
 class State {
+    userInfo = {};
     rootInfo = {
         status: 1,
         wrap_type: 1,
     }
     initParams = (obj, wrap_type) => {
-        console.log(obj, wrap_type)
         this.rootInfo.status = obj.value
         this.rootInfo.wrap_type = wrap_type;
+    }
+
+    getUserInfo = () => {
+        storage.load({
+            key: 'userInfo'
+        }).then((res) => {
+            this.userInfo = res;
+            this.getHasOrderList();
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     @observable orderList = [];
@@ -22,7 +33,7 @@ class State {
     getHasOrderList = () => {
         let url = 'orderHas';
         let params = {
-            id: 20,
+            id: this.userInfo.id,
             wrap_type: this.rootInfo.wrap_type,
             status: this.rootInfo.status,
         };
@@ -61,12 +72,19 @@ class State {
         this.orderList = data;
     }
 
-    delete = (item) => {
-        let url = '';
-        let params = {}
+    cancelOrder = (item) => {
+        let url = 'orderOff';
+        let params = {
+            serial: item.serial,
+        }
         http.post(url, params).then((res) => {
-            let { data = [] } = res;
-            this.processOrderListData(data);
+            if (res === 'success') {
+                Toast.success("取消成功", 2, () => { }, true);
+                this.getHasOrderList();
+            } else {
+                Toast.success("取消失败", 2, () => { }, true);
+            }
+
         })
     }
 }
