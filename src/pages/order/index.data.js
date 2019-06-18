@@ -1,3 +1,4 @@
+const receive = require('./../../asset/receive.png');
 const flag = require('./../../asset/flag.png');
 const states = require('./../../asset/stats.png');
 const jinbi = require('./../../asset/jinbi.png');
@@ -9,12 +10,14 @@ const card1Data = [
         title: '未完成',
         value: 1,
         path: 'orderList',
+        status: '1',
     }, {
         icon: states,
         title: '已完成',
         value: 2,
         path: 'doneOrder',
         navTitle: '浏览已完成',
+        status: '2',
     },
 ];
 
@@ -24,12 +27,14 @@ const card2Data = [
         title: '未完成',
         value: '1',
         path: 'orderList',
+        status: '1',
     }, {
         icon: patreon,
         title: '已完成',
         value: '2',
         path: 'doneOrder',
         navTitle: '垫付已完成',
+        status: '2',
     },
 ]
 

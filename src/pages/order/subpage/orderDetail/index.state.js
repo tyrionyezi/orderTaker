@@ -15,6 +15,7 @@ class State {
     }
 
     @observable orderList = [];
+
     getUserInfo = () => {
         storage.load({
             key: 'userInfo'
@@ -55,7 +56,7 @@ class State {
                     title: item.shop_name,
                     value: item.charge,
                     isTail: true,
-                    path: 'orderProgress'
+                    path: 'confirmAdvancePaymentOrder'
                 })
             } else {
                 data.push({
@@ -63,7 +64,7 @@ class State {
                     title: item.shop_name,
                     value: item.charge,
                     isTail: true,
-                    path: 'orderProgress'
+                    path: 'confirmBrowseOrder'
                 })
             }
         })

@@ -144,7 +144,7 @@ class State {
                 Toast.fail("请登录", 2, () => { }, true);
                 return
             }
-            if (params.buyer === '') {
+            if (!params.buyer) {
                 Toast.fail("请添加的买手信息", 2, () => { }, true);
                 return
             }

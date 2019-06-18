@@ -152,7 +152,7 @@ export default class Index extends Component {
                     <TouchableOpacity
                         style={_style.btnBox}
                         activeOpacity={0.5}
-                        onPress={this.submit}
+                        onPress={_state.addAccount}
                     >
                         <Text style={_style.btnTxt}>确认提交</Text>
                     </TouchableOpacity>
@@ -192,5 +192,10 @@ const _style = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 10,
         color: '#fff'
+    },
+    addAccount: {
+        marginTop: 30,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })

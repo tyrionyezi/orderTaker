@@ -5,6 +5,8 @@ import http from './../../config/fetch';
 
 class State {
 
+
+
     @observable userInfo = {
         cion: 0,
         principal: 0,
@@ -24,7 +26,8 @@ class State {
                 id: res.id,
             }
             http.post(url, params).then((res) => {
-                console.log(res, 'rrr')
+                let { data } = res;
+                this.principal = data.balance;
             })
         }).catch(err => {
             console.log('失败', err);

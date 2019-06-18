@@ -18,12 +18,11 @@ import {
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
 import List from './../../../components/list/index.component';
-import Btn from './../../../components/button/index.component'
+import Btn from './../../../components/button/index.component';
 import _state from './index.state';
 import Listhead from './../../components/headCard/index.component';
 import Steps from './../../components/steps/index.component';
-import { stepsData } from './../../index.data'
-
+import { stepsData } from './../../index.data';
 @observer
 export default class Index extends Component {
     constructor(props) {

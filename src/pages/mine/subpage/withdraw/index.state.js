@@ -7,7 +7,8 @@ class State {
     @observable flagModal = false;
     @observable amount = '';
     onChange = (value) => {
-        this.amount = value;
+        let num = isNaN(value) ? '' : value;
+        this.amount = num;
     }
 
     getUserInfo = () => {
@@ -29,9 +30,18 @@ class State {
             balance: this.amount,
         }
 
+        let remainder = params.balance % 100;
+        if (params.balance < 100 || remainder !== 0) {
+            Toast.info(`提现金额大于100且为100的整数`, 1, () => { }, true);
+            return;
+        }
+
         if (params.bank_id === '') {
             Toast.fail(`请绑定银行卡`, 1, () => { }, true);
             return;
+        }
+        if (params.balance) {
+
         }
 
         if (params.balance === '') {

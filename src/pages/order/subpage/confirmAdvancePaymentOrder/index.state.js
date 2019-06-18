@@ -141,11 +141,13 @@ class State {
         }
 
         http.post(url, params).then((res) => {
-            console.log(res, 'rrrrr')
-            // if (params.goods_url) {
-            //     Toast.success("请填写商品链接", 2, () => { }, true);
-            // }
+            if (res.status == 'scuccess') {
+                Toast.success("订单完成", 2, () => { }, true);
+            } else {
+                Toast.info("订单完成", 2, () => { }, true);
+            }
         })
     }
+
 }
 export default new State()

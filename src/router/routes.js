@@ -9,9 +9,11 @@ import AccountInfo from './../pages/mine/subpage/accountInfo/index.component';
 import UpdatePassword from './../pages/mine/subpage/updatePassoword/index.component';
 import SetAccount from './../pages/goodsList/subPage/setAccount/index.compoent';
 import OrderList from './../pages/order/subpage/orderList/index.component';
-import BrowseOrderDetail from './../pages/order/subpage/browseOrderDetail/index.component';
-import AdvancePaymentOrderDetail from './../pages/order/subpage/advancePaymentOrderDetail/index.component';
+import OrderDetail from './../pages/order/subpage/orderDetail/index.component';
+import ConfirmBrowseOrder from './../pages/order/subpage/confirmBrowseOrder/index.component';
+import ConfirmAdvancePaymentOrder from './../pages/order/subpage/confirmAdvancePaymentOrder/index.component';
 import DoneOrder from './../pages/order/subpage/doneOrder/index.component';
+import OrderProgress from './../pages/order/subpage/verifyProgress/index.component';
 import AboutApp from './../pages/mine/subpage/aboutApp/index.component';
 import AccountMange from './../pages/mine/subpage/accountManage/index.component';
 import AddbankCard from './../pages/mine/subpage/addBankCard/index.component';
@@ -66,20 +68,32 @@ export default Routes = {
             title: navigation.state.params.data.title,
         }),
     },
-    browseOrderDetail: {
-        screen: BrowseOrderDetail, //浏览任务详情
+    orderDetail: {
+        screen: OrderDetail, //订单列表
         navigationOptions: ({ navigation }) => ({
-            title: '浏览任务详情',
+            title: navigation.state.params.data.title,
         }),
     },
-    advancePaymentOrderDetail: {
-        screen: AdvancePaymentOrderDetail, //垫付任务详情
+    confirmBrowseOrder: {
+        screen: ConfirmBrowseOrder, //浏览任务详情
+        navigationOptions: ({ navigation }) => ({
+            title: '确认任务',
+        }),
+    },
+    confirmAdvancePaymentOrder: {
+        screen: ConfirmAdvancePaymentOrder, //垫付任务详情
         navigationOptions: ({ navigation }) => ({
             title: '垫付任务详情',
         }),
     },
     doneOrder: {
         screen: DoneOrder, //垫付任务详情
+        navigationOptions: ({ navigation }) => ({
+            title: navigation.state.params.data.navTitle,
+        }),
+    },
+    orderProgress: {
+        screen: OrderProgress, //垫付任务详情
         navigationOptions: ({ navigation }) => ({
             title: navigation.state.params.data.navTitle,
         }),

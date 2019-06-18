@@ -67,7 +67,6 @@ class State {
     addAccount = async () => {
         let url = 'addBuyer';
         let params = this.reqParams;
-        console.log(params)
         if (params.platform === '') {
             Toast.fail("请选择平台", 2, () => { }, true);
             return

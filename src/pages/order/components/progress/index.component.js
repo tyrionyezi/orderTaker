@@ -74,7 +74,7 @@ const _style = StyleSheet.create({
     itemBox: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 10,
+        marginBottom: 5,
     },
     leftBox: {
         width: '5%',
@@ -82,7 +82,7 @@ const _style = StyleSheet.create({
         // backgroundColor: 'green',
     },
     rightBox: {
-        width: '80%',
+        width: '85%',
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
 

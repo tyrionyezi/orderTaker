@@ -30,7 +30,6 @@ export default class Card extends Component {
 
     render() {
         let { title = '', type = '1', data = [] } = this.props;
-        console.log(title, data, 'datadatadata')
         return (
             <View style={_style.cardBox}>
                 <TouchableOpacity activeOpacity={0.5} style={_style.titleCard} onPress={() => { }}>

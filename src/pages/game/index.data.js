@@ -9,12 +9,13 @@ const card1Data = [
         title: '常规游戏',
         value: '',
         path: 'GoodsList',
-    },{
-        icon: states,
-        title: '活动游戏',
-        value: '',
-        path: 'GoodsList',
     },
+    // {
+    //     icon: states,
+    //     title: '活动游戏',
+    //     value: '',
+    //     path: 'GoodsList',
+    // },
 ];
 
 const card2Data = [
@@ -23,12 +24,13 @@ const card2Data = [
         title: '优质游戏',
         value: '',
         path: 'GoodsList',
-    },{
-        icon: patreon,
-        title: '特别游戏',
-        value: '',
-        path: 'GoodsList',
     },
+    // {
+    //     icon: patreon,
+    //     title: '特别游戏',
+    //     value: '',
+    //     path: 'GoodsList',
+    // },
 ]
 
 export {

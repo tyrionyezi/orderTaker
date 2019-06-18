@@ -10,7 +10,7 @@ class State {
         wrap_type: 1,
     }
     initParams = (obj, wrap_type) => {
-        this.rootInfo.status = obj.value
+        this.rootInfo.status = obj.status;
         this.rootInfo.wrap_type = wrap_type;
     }
 
@@ -57,7 +57,7 @@ class State {
                     title: item.shop_name,
                     value: item.charge,
                     isTail: true,
-                    path: 'advancePaymentOrderDetail'
+                    path: 'confirmAdvancePaymentOrder'
                 })
             } else {
                 data.push({
@@ -65,7 +65,7 @@ class State {
                     title: item.shop_name,
                     value: item.charge,
                     isTail: true,
-                    path: 'browseOrderDetail'
+                    path: 'confirmBrowseOrder'
                 })
             }
         })

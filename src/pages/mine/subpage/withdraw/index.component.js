@@ -54,6 +54,7 @@ export default class Index extends Component {
                     <View style={_style.valueBox}>
                         <Text style={_style.coin}>¥</Text>
                         <TextInput
+                            autoComplete={'cc-number'}
                             autoCapitalize={'none'}
                             placeholder='请输入提现金额'
                             keyboardType={'numeric'}
