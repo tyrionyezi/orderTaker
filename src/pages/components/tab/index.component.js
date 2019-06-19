@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import {
-    Platform,
     StyleSheet,
-    ImageBackground,
-    FlatList,
     View,
     Text,
-    Image,
     TouchableOpacity,
-    AsyncStorage,
     Dimensions,
-    NativeModules,
-    DeviceEventEmitter,
-    Alert
-} from 'react-native'
+} from 'react-native';
+import PropTypes from 'prop-types';
 const { height, width } = Dimensions.get('window');
 export default class Tab extends Component {
     constructor(props) {
         super(props)
+    }
+
+    static propTypes = {
+        data: PropTypes.array.isRequired,
     }
     state = {
         selectIndex: 0

@@ -4,14 +4,21 @@ import http from './../../../../config/fetch';
 import moment from 'moment';
 
 class State {
+    //导航传过来的参数
+    userInfo = {};
     rootInfo = {
-        status: 1,
         wrap_type: 1,
     }
     initParams = (obj, wrap_type) => {
-        console.log(obj, wrap_type)
-        this.rootInfo.status = obj.value
         this.rootInfo.wrap_type = wrap_type;
+        this.orderStatus = 3;
+    }
+    //订单状态
+    orderStatus = 3; //3审核状态 2订单已完成
+    setTabIndex = (item) => {
+        console.log(item, 'ddd')
+        this.orderStatus = item.value;
+        this.getHasOrderList();
     }
 
     @observable orderList = [];
@@ -19,7 +26,8 @@ class State {
         storage.load({
             key: 'userInfo'
         }).then((res) => {
-            this.getHasOrderList(res.id);
+            this.userInfo = res;
+            this.getHasOrderList();
         }).catch(err => {
             console.log(err)
         })
@@ -31,9 +39,9 @@ class State {
     getHasOrderList = (id) => {
         let url = 'orderHas';
         let params = {
-            id: id,
+            id: this.userInfo.id,
             wrap_type: this.rootInfo.wrap_type,
-            status: this.rootInfo.status,
+            status: this.orderStatus,
         };
         if (params.id === '') {
             Toast.fail("请登录", 2, () => { }, true);
@@ -49,7 +57,7 @@ class State {
     processOrderListData = (arr = []) => {
         let data = [];
         arr.map((item, index) => {
-            if (this.rootInfo.wrap_type === 0) {
+            if (this.rootInfo.wrap_type === 3) {
                 data.push({
                     ...item,
                     title: item.shop_name,
@@ -62,7 +70,7 @@ class State {
                     ...item,
                     title: item.shop_name,
                     value: item.charge,
-                    isTail: true,
+                    isTail: false,
                     path: 'orderProgress'
                 })
             }

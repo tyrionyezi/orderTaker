@@ -16,8 +16,11 @@ import {
 } from 'react-native';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
-import List from './../../../components/list/index.component';
+import List from './../../../components/listComponent/index.component';
+import Tab from './../../../components/tab/index.component';
 import _state from './index.state';
+
+import { doneOrderTab } from './../../index.data';
 
 
 @observer
@@ -34,10 +37,29 @@ export default class Index extends Component {
         _state.getUserInfo();
     }
 
+    /**
+     * 进取查看审核进度页面
+     * @param
+     */
+    goVerifyProgress = (item) => {
+        if (item.status == '3') {
+            this.props.navigation.push('orderProgress', {
+                data: item
+            })
+        }
+    }
+
     render() {
         return (
             <View style={_style.container}>
-                <List {...this.props} data={toJS(_state.orderList)} />
+                <Tab
+                    data={doneOrderTab}
+                    onClick={_state.setTabIndex}
+                />
+                <List
+                    data={toJS(_state.orderList)}
+                    onClick={this.goVerifyProgress}
+                />
             </View>
         )
     }

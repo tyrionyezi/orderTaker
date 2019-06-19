@@ -49,7 +49,7 @@ export default class Index extends Component {
                 onPress: () => console.log('cancel'),
                 style: 'cancel',
             },
-            { text: '确定', onPress: _state.cancelOrder(item) },
+            { text: '确定', onPress: _state.cancelOrder.bind(this, item) },
         ]);
     }
 

@@ -130,9 +130,21 @@ const progressData = [
     },
 ]
 
+
+const doneOrderTab = [
+    {
+        name: '已提交',
+        value: '3',
+    }, {
+        name: '已完成',
+        value: '2',
+    },
+]
+
 export {
     card1Data,
     card2Data,
     stepsData,
-    progressData
+    progressData,
+    doneOrderTab
 }

@@ -78,11 +78,11 @@ class State {
             serial: item.serial,
         }
         http.post(url, params).then((res) => {
-            if (res === 'success') {
-                Toast.success("取消成功", 2, () => { }, true);
+            if (res.status === 'success') {
+                Toast.success(res.msg, 2, () => { }, true);
                 this.getHasOrderList();
             } else {
-                Toast.success("取消失败", 2, () => { }, true);
+                Toast.success(res.msg, 2, () => { }, true);
             }
 
         })
