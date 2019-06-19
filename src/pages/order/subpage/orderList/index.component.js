@@ -3,7 +3,7 @@ import {
     Platform,
     StyleSheet,
     ImageBackground,
-    FlatList,
+    ScrollView,
     View,
     Text,
     Image,
@@ -17,7 +17,7 @@ import {
 import { observer } from 'mobx-react';
 import { Modal } from 'antd-mobile-rn';
 import { toJS } from 'mobx';
-import List from './../../../components/list/index.component';
+import ListComponent from './../../../components/listComponent/index.component';
 import _state from './index.state';
 
 
@@ -28,6 +28,13 @@ export default class Index extends Component {
         let data = this.props.navigation.getParam('data', {});
         let type = this.props.navigation.getParam('type', 1);
         _state.initParams(data, type);
+    }
+
+    goComfirm = (item) => {
+        this.props.navigation.navigate(item.path, {
+            data: item,
+            refresh: _state.getHasOrderList,
+        })
     }
 
 
@@ -53,11 +60,16 @@ export default class Index extends Component {
     render() {
         return (
             <View style={_style.container}>
-                <List
-                    {...this.props}
-                    data={toJS(_state.orderList)}
-                    onLongPress={this.delete}
-                />
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                >
+                    <ListComponent
+                        {...this.props}
+                        data={toJS(_state.orderList)}
+                        onLongPress={this.delete}
+                        onClick={this.goComfirm}
+                    />
+                </ScrollView>
             </View>
         )
     }

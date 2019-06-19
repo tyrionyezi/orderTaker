@@ -1,15 +1,25 @@
 import { observable, action, toJS } from 'mobx';
 import { Toast } from 'antd-mobile-rn';
 import http from './../../../../config/fetch';
+import NavigationService from './../../../../config/NavigationService'
 import moment from 'moment';
 
 class State {
-    rootInfo = {
-        serialNumber: '',
-    }
+    userIn = {}
+    rootInfo = {}
 
     initParams = (data) => {
-        this.rootInfo.serialNumber = data.serial;
+        this.rootInfo = data;
+    }
+
+    getUserInfo = () => {
+        storage.load({
+            key: 'userInfo'
+        }).then((res) => {
+            this.userInfo = res;
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     //账户信息
@@ -52,7 +62,7 @@ class State {
     getOrderInfo = () => {
         let url = 'orderInfo';
         let params = {
-            serial: this.rootInfo.serialNumber,
+            serial: this.rootInfo.data.serial,
         }
         if (params.serial === '') {
             Toast.fail("该订单不存在", 2, () => { }, true);
@@ -101,50 +111,60 @@ class State {
     }
 
     formParams = {
-        keywords: '',
-        shop_name: '',
-        goods_url: '',
+        alipay_order: '',
+        pic: '',
+        fee: '',
     }
 
     //获取数据
-    onChange = (key, value) => {
-        console.log(key, value);
-        this.formParams[key] = value;
+    onChange = (value) => {
+        this.formParams.pic = value;
     };
+
+    @observable feeValue = '';
+    //实际支付金额
+    feeOnChange = (value) => {
+        this.feeValue = value;
+        this.formParams.fee = value;
+    }
+    @observable payOrder = '';
+    payOrderOnChange = (value) => {
+        this.payOrder = value;
+        this.formParams.alipay_order = value;
+    }
 
     /**
      * 完成订单
      */
     orderComplete = () => {
-        let url = 'orderComplete';
+        let url = 'orderCompleteDF';
         let params = {
-            serial: this.rootInfo.serialNumber,
-            shop_name: this.formParams.shop_name,
-            goods_url: this.formParams.goods_url,
-            keywords: this.formParams.keywords,
+            id: this.userInfo.id,
+            serial: this.rootInfo.data.serial,
+            pic: this.formParams.pic,
+            fee: this.formParams.fee,
+            alipay_order: this.formParams.alipay_order,
         }
         if (params.serial === '') {
-            Toast.fail("该订单不存在", 2, () => { }, true);
+            Toast.info("该订单不存在", 2, () => { }, true);
             return
         }
-        if (params.keywords === '') {
-            Toast.fail("请填写关键字", 2, () => { }, true);
+        if (params.fee === '') {
+            Toast.info("请填写实际垫付金额", 2, () => { }, true);
             return
         }
-        if (params.shop_name === '') {
-            Toast.fail("请填写商店名称", 2, () => { }, true);
-            return
-        }
-        if (params.goods_url === '') {
-            Toast.fail("请填写商品链接", 2, () => { }, true);
+        if (params.alipay_order === '') {
+            Toast.info("请填写支付宝商户订单号", 2, () => { }, true);
             return
         }
 
         http.post(url, params).then((res) => {
-            if (res.status == 'scuccess') {
+            if (res.status == 'success') {
                 Toast.success("订单完成", 2, () => { }, true);
+                NavigationService.back();
+                this.rootInfo.refresh();
             } else {
-                Toast.info("订单完成", 2, () => { }, true);
+                Toast.info(res.msg, 2, () => { }, true);
             }
         })
     }

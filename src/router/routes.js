@@ -95,7 +95,7 @@ export default Routes = {
     orderProgress: {
         screen: OrderProgress, //垫付任务详情
         navigationOptions: ({ navigation }) => ({
-            title: navigation.state.params.data.navTitle,
+            title: '订单审核状态',
         }),
     },
 
