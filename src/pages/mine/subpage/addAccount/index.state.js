@@ -6,6 +6,7 @@ import moment from 'moment';
 
 class State {
     rootInfo = {};
+    userInfo = {}
     @observable addFileds = {
         platform: '',
         name: '',
@@ -15,13 +16,25 @@ class State {
         tag: '',
         serial: '',
         receiver_name: '',
-        recevier_tel: '',
+        receiver_tel: '',
         address: '',
         street: '',
     }
 
+    getUserInfo = () => {
+        storage.load({
+            key: 'userInfo'
+        }).then((res) => {
+            console.log('res', res)
+            this.userInfo = res;
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     initParams = (data) => {
         this.rootInfo = data;
+        this.getUserInfo();
         this.addFileds = {
             platform: '',
             name: '',
@@ -38,7 +51,7 @@ class State {
     }
 
     reqParams = {
-        id: '20',
+        id: '',
         name: '',
         platform: '',
         sex: '',
@@ -47,7 +60,7 @@ class State {
         tag: '',
         serial: '',
         receiver_name: '',
-        recevier_tel: '',
+        receiver_tel: '',
         address: '',
         street: '',
     }
@@ -55,12 +68,26 @@ class State {
     @action setAddFiledsValue = (fileds, value) => {
         this.addFileds[fileds] = value;
         this.reqParams[fileds] = value;
+        this.reqParams.id = this.userInfo.id;
         if (fileds === 'sex') {
             this.reqParams[fileds] = value[0];
         }
         if (fileds === 'credit') {
             this.reqParams[fileds] = value[0];
         }
+
+        if (fileds === 'platform') {
+            this.reqParams[fileds] = value[0];
+        }
+
+        if (fileds === 'address') {
+            this.reqParams[fileds] = value.join(',');
+        }
+
+        if (fileds === 'Ymd') {
+            this.reqParams[fileds] = moment(value).format('YYYY-MM-DD HH:MM:SS');
+        }
+
     }
 
 
@@ -79,6 +106,28 @@ class State {
             Toast.fail("平台账号不能为空", 2, () => { }, true);
             return
         }
+        if (params.Ymd === '') {
+            Toast.fail("生日不能为空", 2, () => { }, true);
+            return
+        }
+        if (params.serial === '') {
+            Toast.fail("订单编号", 2, () => { }, true);
+            return
+        }
+        if (params.receiver_name === '') {
+            Toast.fail("收件人不能为空", 2, () => { }, true);
+            return
+        }
+        if (params.receiver_tel === '') {
+            Toast.fail("手机人电话不能为空", 2, () => { }, true);
+            return
+        }
+
+        if (params.address === '') {
+            Toast.fail("手机人电话不能为空", 2, () => { }, true);
+            return
+        }
+
         let result = await http.post(url, params);
         if (result === 'success') {
             Toast.success("添加成功", 2, () => { }, true);
@@ -86,7 +135,7 @@ class State {
             this.rootInfo.refresh();
 
         } else {
-            Toast.success(`添加失败，${result}`, 2, () => { }, true);
+            Toast.info(`添加失败，${result}`, 2, () => { }, true);
         }
 
     };

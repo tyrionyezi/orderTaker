@@ -32,7 +32,7 @@ class State {
 
 
     progressData = (obj = []) => {
-        let data = [];
+        let data = []
         for (i in obj) {
             let _arr = [];
             obj[i].map((item, index) => {
@@ -47,7 +47,7 @@ class State {
             data.push(_arr);
         }
 
-        this.dataList = [];
+        this.dataList = data;
     }
 
     setCurrentListData = (item, index) => {
@@ -60,8 +60,7 @@ class State {
             id: item.id
         };
         http.post(url, params).then((res) => {
-            let { data } = res;
-            if (data.status === 'success') {
+            if (res.status === 'success') {
                 Toast.success("删除成功", 2, () => { }, true);
                 this.getBuyerList();
             } else {

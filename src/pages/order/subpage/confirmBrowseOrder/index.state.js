@@ -66,6 +66,23 @@ class State {
 
     //加工数据
     processOrderListData = (obj = []) => {
+        let filterTxt = {
+            '0': '否',
+            '1': '是'
+        }
+        let sortTxt = {
+            '0': '销量',
+            '1': '综合',
+            '2': '直通车'
+        }
+        let taskTxt = {
+            '1': '手机淘宝/天猫任务(app下单)',
+            '3': '手机京东任务',
+            '5': '手机拼多多',
+            '7': '手机淘宝/天猫浏览、收藏、加购物车',
+            '9': '手机京东浏览、收藏、加购物车',
+            '11': '手机拼多多浏览任务'
+        }
         let data = [
             {
                 title: '任务账号',
@@ -77,23 +94,27 @@ class State {
                 isTail: false,
             }, {
                 title: '任务类型',
-                value: obj.type,
+                value: taskTxt[obj.type],
                 isTail: false,
             }, {
                 title: '搜索关键字',
-                value: obj.keywords,
+                value: obj.commen_keywords,
                 isTail: false,
             }, {
                 title: '是否允许筛选',
-                value: '',
+                value: filterTxt[obj.filter],
                 isTail: false,
             }, {
                 title: '排序方式',
-                value: '',
+                value: sortTxt[obj.sort_style],
                 isTail: false,
             }, {
                 title: '收货人数',
-                value: '',
+                value: obj.receive_num,
+                isTail: false,
+            }, {
+                title: '关键字确认',
+                value: `${obj.keywords && obj.keywords.substring(0, 2)}***${obj.keywords && obj.keywords.slice(-2)}`,
                 isTail: false,
             },
         ];

@@ -26,14 +26,10 @@ export default class Index extends Component {
     }
 
 
-    submit = async () => {
-        let result = await _state.addAccount();
-        if (result) {
-            this.props.navigation.pop();
-        }
-    }
 
-    componentDidMount() { }
+    componentDidMount() {
+        _state.getBuyerInfo();
+    }
 
     componentWillUnmount() {
         // this.props.navigation.state.params.refresh();
@@ -44,17 +40,6 @@ export default class Index extends Component {
             <View style={_style.container}>
                 <View style={_style.formBox}>
                     <List>
-                        <Picker
-                            data={[
-                                { label: '男', value: '1' },
-                                { label: '女', value: '2' }
-                            ]}
-                            cols={1}
-                            value={_state.addFileds.sex}
-                            onOk={(sex) => _state.setAddFiledsValue('sex', sex)}
-                        >
-                            <List.Item arrow="horizontal" style={_style.label}>平台</List.Item>
-                        </Picker>
                         <InputItem
                             clear
                             value={_state.addFileds.name}
@@ -129,8 +114,8 @@ export default class Index extends Component {
                         </InputItem>
                         <InputItem
                             clear
-                            value={_state.addFileds.recevier_tel}
-                            onChange={(recevier_tel) => _state.setAddFiledsValue('recevier_tel', recevier_tel)}
+                            value={_state.addFileds.receiver_tel}
+                            onChange={(receiver_tel) => _state.setAddFiledsValue('receiver_tel', receiver_tel)}
                             placeholder="请输入"
                         >
                             电话
@@ -157,7 +142,7 @@ export default class Index extends Component {
                     <TouchableOpacity
                         style={_style.btnBox}
                         activeOpacity={0.5}
-                        onPress={this.submit}
+                        onPress={_state.updateBuyer}
                     >
                         <Text style={_style.btnTxt}>确认提交</Text>
                     </TouchableOpacity>

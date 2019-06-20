@@ -17,7 +17,7 @@ import {
 import { observer } from 'mobx-react';
 import { Modal } from 'antd-mobile-rn';
 import { toJS } from 'mobx';
-import List from './../../../components/list/index.component';
+import List from './../../../components/listComponent/index.component';
 import Tab from './../../../components/tab/index.component';
 import _state from './index.state';
 @observer
@@ -46,6 +46,13 @@ export default class Index extends Component {
         })
     }
 
+    goUpdateAccount = (item) => {
+        this.props.navigation.navigate('updateAccount', {
+            data: item,
+            refresh: _state.getBuyerList
+        })
+    }
+
     delete = (item) => {
         Modal.alert('删除', '', [
             {
@@ -53,7 +60,7 @@ export default class Index extends Component {
                 onPress: () => console.log('cancel'),
                 style: 'cancel',
             },
-            { text: '确定', onPress: _state.delete(item) },
+            { text: '确定', onPress: _state.delete.bind(this, item) },
         ]);
     }
 
@@ -82,6 +89,7 @@ export default class Index extends Component {
                         {...this.props}
                         data={toJS(_state.dataList)[_state.tabIndex]}
                         onLongPress={this.delete}
+                        onClick={this.goUpdateAccount}
                     />
                 </ScrollView>
                 {/* <Modal

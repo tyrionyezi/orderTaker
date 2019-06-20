@@ -4,6 +4,7 @@ import http from './../../../../config/fetch';
 import moment from 'moment';
 
 class State {
+    userInfo = {}
     @observable name = null;
     @observable card = null;
     @observable depositBank = [];
@@ -15,6 +16,17 @@ class State {
         this.card = null;
         this.depositBank = [];
         this.pic_bank = null;
+        this.getUserInfo();
+    }
+
+    getUserInfo = () => {
+        storage.load({
+            key: 'userInfo'
+        }).then((res) => {
+            this.userInfo = res;
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     nameChange = (value) => {
@@ -42,7 +54,7 @@ class State {
     addBank = async () => {
         let url = 'addBank';
         let params = {
-            id: '',
+            id: this.userInfo.id,
             name: this.name,
             card: this.card,
             deposit: this.deposit,

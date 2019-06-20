@@ -40,14 +40,14 @@ export default class Header extends Component {
                     style={{ alignItems: 'center' }}
                 >
                     <Image style={{ height: 25, width: 25 }} source={require('./../../../../asset/¥.png')} />
-                    <Text style={_style.tilteTxt}>{`金币：${10}`}</Text>
+                    <Text style={_style.tilteTxt}>{`金币：${0}`}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{ alignItems: 'center' }}
                     onPress={this.getMoney.bind(this, { title: '本金提现' })}
                 >
                     <Image style={{ height: 25, width: 25 }} source={require('./../../../../asset/purse.png')} />
-                    <Text style={_style.tilteTxt}>{`本金：${10}`}</Text>
+                    <Text style={_style.tilteTxt}>{`本金：${0}`}</Text>
                 </TouchableOpacity>
             </View>
         )

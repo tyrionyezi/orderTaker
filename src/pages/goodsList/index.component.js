@@ -67,6 +67,7 @@ export default class Index extends Component {
                 }
                 <View style={_style.listBox}>
                     <FlatList
+                        showsVerticalScrollIndicator={false}
                         refreshing={false}
                         onRefresh={_state.getTaskList}
                         keyExtractor={(item, index) => `f${index}`}
@@ -95,6 +96,7 @@ export default class Index extends Component {
 
 const _style = StyleSheet.create({
     contianer: {
+        flex: 1,
         backgroundColor: '#dcd8d84d',
     },
     accountBox: {
@@ -113,6 +115,7 @@ const _style = StyleSheet.create({
         borderRadius: 15,
     },
     listBox: {
+        flex: 1,
         paddingHorizontal: 10,
         marginTop: 5,
         backgroundColor: '#fff'

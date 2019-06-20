@@ -124,8 +124,8 @@ export default class Index extends Component {
                         </InputItem>
                         <InputItem
                             clear
-                            value={_state.addFileds.recevier_tel}
-                            onChange={(recevier_tel) => _state.setAddFiledsValue('recevier_tel', recevier_tel)}
+                            value={_state.addFileds.receiver_tel}
+                            onChange={(receiver_tel) => _state.setAddFiledsValue('receiver_tel', receiver_tel)}
                             placeholder="请输入"
                         >
                             电话

@@ -96,14 +96,14 @@ class State {
     getAccountList = () => {
         let url = 'getBuyerList';
         let params = {
-            id: this.userInfo.id
+            id: this.userInfo.id,
+            status: '1',
         }
         if (params.id === '') {
             return
         }
         http.post(url, params).then((res) => {
             let { data = [] } = res;
-            console.log(res, 'resresresres')
             this.allPlatformSet = data;
             if (this.allPlatformSet['0'].length > 0) {
                 this.setSingleAccount(0, this.allPlatformSet['0'][0])
