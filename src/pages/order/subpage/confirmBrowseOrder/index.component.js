@@ -28,8 +28,8 @@ import { stepsData } from './../../index.data'
 export default class Index extends Component {
     constructor(props) {
         super(props);
-        let data = this.props.navigation.getParam('data', {});
-        _state.initParams(data);
+        let rootInfo = this.props.navigation.state.params;
+        _state.initParams(rootInfo);
     }
 
     componentDidMount() {

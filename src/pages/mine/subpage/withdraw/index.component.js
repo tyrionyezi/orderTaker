@@ -18,7 +18,7 @@ import {
 const { height, width } = Dimensions.get('window');
 import { observer } from 'mobx-react';
 import { Modal } from 'antd-mobile-rn';
-import List from './../../../components/list/index.component';
+import List from './../../../components/listComponent/index.component';
 import Btn from './../../../components/button/index.component';
 import _state from './index.state';
 
@@ -30,6 +30,9 @@ export default class Index extends Component {
 
     componentDidMount() {
         _state.getUserInfo();
+    }
+
+    componentWillUnmount() {
     }
 
 
@@ -82,7 +85,7 @@ export default class Index extends Component {
                     onClose={_state.switchModal}
                 >
                     <List
-                        onClick={(item) => _state.setCurrentBankAccount(item, true)}
+                        onClick={(item) => { _state.setCurrentBankAccount(item, true) }}
                         data={bankList}
                     />
                 </Modal>

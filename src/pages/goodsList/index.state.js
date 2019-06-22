@@ -149,9 +149,11 @@ class State {
                 return
             }
             http.post(url, params).then((res) => {
-                if (res === 'sucess') {
+                if (res.status === 'sucess') {
                     Toast.success("接单成功", 2, () => { }, true);
                     this.getTaskList();
+                } else {
+                    Toast.info(res.msg, 2, () => { }, true);
                 }
             })
         })

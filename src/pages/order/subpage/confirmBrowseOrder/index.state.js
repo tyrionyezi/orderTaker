@@ -1,15 +1,14 @@
 import { observable, action, toJS } from 'mobx';
 import { Toast } from 'antd-mobile-rn';
 import http from './../../../../config/fetch';
+import NavigationService from './../../../../config/NavigationService';
 import moment from 'moment';
 
 class State {
-    rootInfo = {
-        serialNumber: '',
-    }
+    rootInfo = {}
 
     initParams = (data) => {
-        this.rootInfo.serialNumber = data.serial;
+        this.rootInfo = data;
     }
 
     //账户信息
@@ -52,7 +51,7 @@ class State {
     getOrderInfo = () => {
         let url = 'orderInfo';
         let params = {
-            serial: this.rootInfo.serialNumber,
+            serial: this.rootInfo.data.serial,
         }
         if (params.serial === '') {
             Toast.fail("该订单不存在", 2, () => { }, true);
@@ -164,6 +163,8 @@ class State {
         http.post(url, params).then((res) => {
             if (res.status == 'scuccess') {
                 Toast.success("订单完成", 2, () => { }, true);
+                NavigationService.back();
+                this.rootInfo.refresh();
             } else {
                 Toast.info("订单完成", 2, () => { }, true);
             }

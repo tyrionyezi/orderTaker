@@ -1,7 +1,7 @@
 import { observable, action, toJS } from 'mobx';
 import { Toast } from 'antd-mobile-rn';
 import http from './../../../../config/fetch';
-import NavigationService from './../../../../config/NavigationService'
+import NavigationService from './../../../../config/NavigationService';
 import moment from 'moment';
 
 class State {

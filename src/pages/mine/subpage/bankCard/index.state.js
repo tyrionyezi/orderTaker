@@ -64,12 +64,18 @@ class State {
         if (arr.length === 0) this.bankList = [];
         let data = [];
         arr.map((item, index) => {
-            data.push({
+            let obj = {
                 ...item,
                 title: item.deposit,
                 value: item.card,
                 isTail: false
-            })
+            }
+            if (item.status == '0') {
+                obj.value = '待审核';
+            } else if (item.status == '2') {
+                obj.value = '未通过'
+            }
+            data.push(obj)
         })
         this.bankList = data;
     }

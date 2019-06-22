@@ -11,6 +11,12 @@ class State {
         this.amount = num;
     }
 
+    initParams = () => {
+        this.currentbankAccount = {
+            title: ''
+        }
+    }
+
     getUserInfo = () => {
         storage.load({
             key: 'userInfo'
@@ -31,21 +37,17 @@ class State {
         }
 
         let remainder = params.balance % 100;
+        if (!params.bank_id || params.bank_id === '') {
+            Toast.info(`请绑定银行卡`, 1, () => { }, true);
+            return;
+        }
         if (params.balance < 100 || remainder !== 0) {
             Toast.info(`提现金额大于100且为100的整数`, 1, () => { }, true);
             return;
         }
 
-        if (params.bank_id === '') {
-            Toast.fail(`请绑定银行卡`, 1, () => { }, true);
-            return;
-        }
-        if (params.balance) {
-
-        }
-
         if (params.balance === '') {
-            Toast.fail(`请出入转账金额`, 1, () => { }, true);
+            Toast.info(`请出入转账金额`, 1, () => { }, true);
             return;
         }
 
@@ -65,7 +67,8 @@ class State {
     getBankList = (id) => {
         let url = 'getBankList';
         let params = {
-            id: id
+            id: id,
+            status: '1'
         }
         http.post(url, params).then((res) => {
             let { data } = res;
@@ -89,16 +92,20 @@ class State {
         return data;
     }
 
-    @observable currentbankAccount = {};
+    @observable currentbankAccount = {
+        title: ''
+    };
     /**
      * 设置当前取款账户
      */
     setCurrentBankAccount = (obj = {}, flag) => {
+        console.log(obj, flag, 'ggg')
         this.currentbankAccount = obj;
         if (flag) {
             this.switchModal();
         }
     }
+
 
 
 
