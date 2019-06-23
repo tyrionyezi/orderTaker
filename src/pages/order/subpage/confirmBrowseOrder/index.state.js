@@ -5,10 +5,21 @@ import NavigationService from './../../../../config/NavigationService';
 import moment from 'moment';
 
 class State {
+    userInfo = {};
     rootInfo = {}
 
     initParams = (data) => {
         this.rootInfo = data;
+    }
+
+    getUserInfo = () => {
+        storage.load({
+            key: 'userInfo'
+        }).then((res) => {
+            this.userInfo = res;
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     //账户信息
@@ -81,6 +92,17 @@ class State {
             '7': '手机淘宝/天猫浏览、收藏、加购物车',
             '9': '手机京东浏览、收藏、加购物车',
             '11': '手机拼多多浏览任务'
+        };
+        formatString = (str) => {
+            if ((typeof str) !== 'string') return;
+            let num = str.length;
+            if (num <= 2) return str;
+            let sym = '';
+            for (let i = 1; i < num; i++) {
+                sym = sym + '*'
+            }
+
+            return `${str.slice(0, 1)}${sym}${str.slice(-1)}`
         }
         let data = [
             {
@@ -113,10 +135,11 @@ class State {
                 isTail: false,
             }, {
                 title: '关键字确认',
-                value: `${obj.keywords && obj.keywords.substring(0, 2)}***${obj.keywords && obj.keywords.slice(-2)}`,
+                value: formatString(obj.keywords),
                 isTail: false,
             },
         ];
+
         this.acconutInfoList = data;
     }
 
@@ -161,12 +184,12 @@ class State {
         }
 
         http.post(url, params).then((res) => {
-            if (res.status == 'scuccess') {
+            if (res.status == 'success') {
                 Toast.success("订单完成", 2, () => { }, true);
                 NavigationService.back();
                 this.rootInfo.refresh();
             } else {
-                Toast.info("订单完成", 2, () => { }, true);
+                Toast.info(res.msg, 2, () => { }, true);
             }
         })
     }

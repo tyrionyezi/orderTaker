@@ -60,7 +60,6 @@ class State {
     }
 
     processData = (arr = []) => {
-        console.log(arr, 'arr')
         if (arr.length === 0) this.bankList = [];
         let data = [];
         arr.map((item, index) => {

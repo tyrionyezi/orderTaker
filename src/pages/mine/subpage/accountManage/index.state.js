@@ -36,13 +36,22 @@ class State {
         for (i in obj) {
             let _arr = [];
             obj[i].map((item, index) => {
-                _arr.push({
+                let obj = {};
+                obj = {
                     ...item,
                     title: item.name,
                     value: item.id,
                     path: 'updateAccount',
                     isTail: true
-                })
+                }
+                if (item.status == '0') {
+                    obj.value = '待审核';
+                } else if (item.status == '2') {
+                    obj.value = '未通过'
+                } else {
+
+                }
+                _arr.push(obj)
             })
             data.push(_arr);
         }

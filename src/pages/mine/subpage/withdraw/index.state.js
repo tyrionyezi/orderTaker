@@ -6,6 +6,7 @@ class State {
     userInfo = {};
     @observable flagModal = false;
     @observable amount = '';
+    principal = 0;
     onChange = (value) => {
         let num = isNaN(value) ? '' : value;
         this.amount = num;
@@ -23,8 +24,24 @@ class State {
         }).then((res) => {
             this.userInfo = res;
             this.getBankList(res.id);
+            this.getBalance();
         }).catch(err => {
             console.log(err)
+        })
+    }
+
+    /**
+     * 获取账户余额信息
+     */
+
+    getBalance = () => {
+        let url = 'getUserInfo';
+        let params = {
+            id: this.userInfo.id,
+        }
+        http.post(url, params).then((res) => {
+            let { data } = res;
+            this.principal = data.balance;
         })
     }
 
@@ -37,6 +54,10 @@ class State {
         }
 
         let remainder = params.balance % 100;
+        if (params.balance > this.principal) {
+            Toast.info(`提现金额不能大于账户余额`, 1, () => { }, true);
+            return;
+        }
         if (!params.bank_id || params.bank_id === '') {
             Toast.info(`请绑定银行卡`, 1, () => { }, true);
             return;

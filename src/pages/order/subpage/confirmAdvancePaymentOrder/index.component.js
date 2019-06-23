@@ -54,10 +54,10 @@ export default class Index extends Component {
                         />
                     </View>
                     <View style={_style.rowLayout}>
-                        <Text>2、支付订单号</Text>
+                        <Text>2、物流编号</Text>
                         <TextInput
                             autoCapitalize={'none'}
-                            placeholder='请输入支付宝订单号'
+                            placeholder='请输入快递单号'
                             keyboardType={'default'}
                             style={_style.textInput}
                             value={_state.payOrder}

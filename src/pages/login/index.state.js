@@ -48,6 +48,7 @@ class State {
         }
         let result = await http.post(url, params);
         if (result.success === 'true') {
+            global.userInfo = result.info;
             storage.save({
                 key: 'loginInfo',
                 data: params

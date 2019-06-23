@@ -17,6 +17,7 @@ import {
 const { height, width } = Dimensions.get('window');
 import Btn from './../../../components/button/index.component';
 import List from './../../../components/list/index.component';
+import _state from './index.state';
 export default class Index extends Component {
     constructor(props) {
         super(props)
@@ -28,11 +29,15 @@ export default class Index extends Component {
         })
     };
 
+    componentDidMount() {
+        _state.getUserInfo();
+    }
+
     render() {
         return (
             <View style={_style.contianer}>
                 <View style={_style.headBox}>
-                    <Text style={_style.value}>100</Text>
+                    <Text style={_style.value}>{_state.principal}</Text>
                     <Text style={_style.nametxt}>余额</Text>
                 </View>
                 <List

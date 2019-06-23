@@ -102,7 +102,12 @@ export default class Index extends Component {
                     }
 
                     <View>
-                        <Btn txt={'提交'} onClick={_state.addCertification} />
+                        {
+                            _state.idCardStatus === 0 ?
+                                <Btn txt={'提交'} onClick={_state.addCertification} />
+                                :
+                                <View />
+                        }
                     </View>
                 </ScrollView>
             </View>
