@@ -31,8 +31,7 @@ export default class HttpUtils {
                     'Content-Type': 'application/json;charset=utf-8' //告诉服务器，我们提交的数据类型
                 },
                 body: JSON.stringify(params),//(把你想提交得数据序列化为json字符串类型，然后提交)body中的数据就是我们需要向服务器提交的数据,比如用户名,密码等
-            })//返回 服务器处理的结果
-                .then(response => response.json())
+            }).then(response => response.json())//返回 服务器处理的结果
                 .then(result => {
                     Toast.hide();
                     console.log(result, 'resultresult')
@@ -42,8 +41,7 @@ export default class HttpUtils {
                     Toast.hide();
                     reject(error);
                 })
-        })
-        )
+        }))
     }
 }
 //数据转换成字符串 JSON.stringify(params)      //将数据JSON化 JSON.parse(responseJSON)

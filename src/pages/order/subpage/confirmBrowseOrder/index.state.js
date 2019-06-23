@@ -161,7 +161,7 @@ class State {
     orderComplete = () => {
         let url = 'orderComplete';
         let params = {
-            serial: this.rootInfo.serialNumber,
+            serial: this.rootInfo.data.serial,
             shop_name: this.formParams.shop_name,
             goods_url: this.formParams.goods_url,
             keywords: this.formParams.keywords,
@@ -185,9 +185,9 @@ class State {
 
         http.post(url, params).then((res) => {
             if (res.status == 'success') {
-                Toast.success("订单完成", 2, () => { }, true);
                 NavigationService.back();
                 this.rootInfo.refresh();
+                Toast.success("订单完成", 1, () => { }, true);
             } else {
                 Toast.info(res.msg, 2, () => { }, true);
             }

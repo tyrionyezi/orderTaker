@@ -91,7 +91,7 @@ class State {
     }
 
 
-    addAccount = async () => {
+    addAccount = () => {
         let url = 'addBuyer';
         let params = this.reqParams;
         if (params.platform === '') {
@@ -128,16 +128,15 @@ class State {
             return
         }
 
-        let result = await http.post(url, params);
-        if (result === 'success') {
-            Toast.success("添加成功", 2, () => { }, true);
-            NavigationService.back();
-            this.rootInfo.refresh();
-
-        } else {
-            Toast.info(`添加失败，${result}`, 2, () => { }, true);
-        }
-
+        http.post(url, params).then((result) => {
+            if (result === 'success') {
+                NavigationService.back();
+                this.rootInfo.refresh();
+                Toast.success("添加成功", 1, () => { }, true);
+            } else {
+                Toast.info(`添加失败，${result}`, 2, () => { }, true);
+            }
+        });
     };
 
 }

@@ -25,7 +25,9 @@ import _state from './index.state';
 @observer
 export default class Index extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        let rootInfo = this.props.navigation.state.params;
+        _state.initParams(rootInfo);
     }
 
     componentDidMount() {

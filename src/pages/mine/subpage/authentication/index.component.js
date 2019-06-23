@@ -108,6 +108,7 @@ export default class Index extends Component {
                                 :
                                 <View />
                         }
+                        {/* <Text>{_state.idCardStatus}</Text> */}
                     </View>
                 </ScrollView>
             </View>

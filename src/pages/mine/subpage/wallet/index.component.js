@@ -24,8 +24,9 @@ export default class Index extends Component {
     }
 
     toWithdraw = () => {
-        this.props.navigation.push('withdraw', {
-            data: { title: '收益提现' }
+        this.props.navigation.navigate('withdraw', {
+            data: { title: '收益提现' },
+            refresh: _state.getBalance,
         })
     };
 

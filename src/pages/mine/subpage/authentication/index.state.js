@@ -6,6 +6,7 @@ import storage from '../../../../config/storage';
 
 class State {
     userId = '';
+    userInfo = {};
     @observable name = null;
     @observable idCard = null;
     @observable idCardStatus = null;
@@ -26,6 +27,16 @@ class State {
         this.idCardStatus = null;
         this.pic_front = null;
         this.pic_back = null;
+    }
+
+    getUserInfo = () => {
+        storage.load({
+            key: 'userInfo'
+        }).then((res) => {
+            this.userInfo = res;
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     getIdCardFrontPic = (data) => {
@@ -120,12 +131,13 @@ class State {
                 return
             }
             http.post(url, params).then((result) => {
-                let { data = {} } = result;
+                let data = result;
                 if (data.status === 'success') {
+                    this.getCertificationList();
                     Toast.success(`上传成功`, 1, () => { }, true);
                     return true;
                 } else {
-                    Toast.fail(`添加失败`, 1, () => { }, true);
+                    Toast.info(`添加失败`, 1, () => { }, true);
                     return false;
                 }
             });

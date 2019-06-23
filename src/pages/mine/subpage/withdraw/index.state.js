@@ -1,9 +1,11 @@
 import { observable, action, toJS } from 'mobx';
 import { Toast } from 'antd-mobile-rn';
+import NavigationService from './../../../../config/NavigationService';
 import http from './../../../../config/fetch';
 
 class State {
     userInfo = {};
+    rootInfo = {};
     @observable flagModal = false;
     @observable amount = '';
     principal = 0;
@@ -12,7 +14,8 @@ class State {
         this.amount = num;
     }
 
-    initParams = () => {
+    initParams = (data) => {
+        this.rootInfo = data;
         this.currentbankAccount = {
             title: ''
         }
@@ -74,6 +77,8 @@ class State {
 
         http.post(url, params).then((res) => {
             if (res.status === "success") {
+                NavigationService.back();
+                this.rootInfo.refresh();
                 Toast.success(`提现成功`, 1, () => { }, true);
             } else {
                 Toast.fail(`体现失败`, 1, () => { }, true);

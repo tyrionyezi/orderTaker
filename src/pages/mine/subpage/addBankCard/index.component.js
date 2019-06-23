@@ -26,7 +26,8 @@ import { bankList } from './index.data'
 export default class Index extends Component {
     constructor(props) {
         super(props);
-        _state.initParams();
+        let rootInfo = this.props.navigation.state.params;
+        _state.initParams(rootInfo);
     }
     render() {
         return (

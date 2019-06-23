@@ -131,9 +131,9 @@ class State {
         }
 
         if (result.status === 'success') {
-            Toast.success("修改成功", 2, () => { }, true);
             NavigationService.back();
             this.rootInfo.refresh();
+            Toast.success("修改成功", 2, () => { }, true);
         } else {
             Toast.success(`添加失败，${result}`, 2, () => { }, true);
             return false;

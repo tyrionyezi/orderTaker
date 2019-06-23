@@ -1,17 +1,20 @@
 import { observable, action, toJS } from 'mobx';
 import { Toast } from 'antd-mobile-rn';
 import http from './../../../../config/fetch';
+import NavigationService from "./../../../../config/NavigationService";
 import moment from 'moment';
 
 class State {
     userInfo = {}
+    rootInfo = {}
     @observable name = null;
     @observable card = null;
     @observable depositBank = [];
     deposit = '';
     pic_bank = null;
 
-    initParams = () => {
+    initParams = (data) => {
+        this.rootInfo = data;
         this.name = null;
         this.card = null;
         this.depositBank = [];
@@ -83,8 +86,17 @@ class State {
             }
             console.log(params)
             http.post(url, params).then((result) => {
-                console.log(result, 'result')
-                // this.processData(result.data);
+                let data = result;
+                if (data.status === 'success') {
+                    NavigationService.back();
+                    this.rootInfo.refresh();
+                    Toast.success(`上传成功`, 1, () => { }, true);
+                    return true;
+                } else {
+                    Toast.info(`添加失败`, 1, () => { }, true);
+                    return false;
+                }
+
             });
         }).catch((err) => {
             console.log(err)
