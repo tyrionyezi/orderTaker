@@ -16,8 +16,10 @@ export default class HttpUtils {
         })
         )
     };
-    static post = (url, data) => {
-        Toast.loading('请稍等...', 0);
+    static post = (url, data, loading = true) => {
+        if (loading === true) {
+            Toast.loading('请稍等...', 0);
+        }
         let params = {
             user_id: global.userInfo && global.userInfo.id,
             ...data

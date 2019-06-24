@@ -1,4 +1,4 @@
-import { observable, action, toJS } from 'mobx';
+import { observable, action, toJS, observe } from 'mobx';
 import { Toast } from 'antd-mobile-rn';
 import moment from 'moment';
 import http from './../../config/fetch';
@@ -11,6 +11,7 @@ class State {
         cion: 0,
         principal: 0,
     }
+
 
 
     /**
@@ -27,7 +28,7 @@ class State {
             }
             http.post(url, params).then((res) => {
                 let { data } = res;
-                this.principal = data.balance;
+                this.userInfo.principal = data.balance;
             })
         }).catch(err => {
             console.log('失败', err);

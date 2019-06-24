@@ -88,10 +88,9 @@ class State {
             http.post(url, params).then((result) => {
                 let data = result;
                 if (data.status === 'success') {
-                    NavigationService.back();
-                    this.rootInfo.refresh();
+                    NavigationService.pop();
                     Toast.success(`上传成功`, 1, () => { }, true);
-                    return true;
+                    this.rootInfo.refresh();
                 } else {
                     Toast.info(`添加失败`, 1, () => { }, true);
                     return false;

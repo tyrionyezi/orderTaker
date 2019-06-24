@@ -14,10 +14,12 @@ import {
     DeviceEventEmitter,
     Alert
 } from 'react-native';
+import { observer } from 'mobx-react';
 const { height, width } = Dimensions.get('window');
 import Btn from './../../../components/button/index.component';
 import List from './../../../components/list/index.component';
 import _state from './index.state';
+@observer
 export default class Index extends Component {
     constructor(props) {
         super(props)

@@ -24,8 +24,10 @@ export default class Index extends Component {
         return (
             <View style={_style.contanier}>
                 <View style={_style.qrCodeBox}>
-                    <View style={_style.box}></View>
-                    <Text style={_style.txt}>在线微信</Text>
+                    <View style={_style.box}>
+                        <Image style={{ width: 200, height: 200 }} source={require('./../../../asset/kefu.png')} />
+                    </View>
+                    <Text style={_style.txt}>在线QQ</Text>
                 </View>
             </View>
         )

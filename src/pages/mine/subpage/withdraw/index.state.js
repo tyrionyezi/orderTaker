@@ -77,7 +77,7 @@ class State {
 
         http.post(url, params).then((res) => {
             if (res.status === "success") {
-                NavigationService.back();
+                NavigationService.pop();
                 this.rootInfo.refresh();
                 Toast.success(`提现成功`, 1, () => { }, true);
             } else {

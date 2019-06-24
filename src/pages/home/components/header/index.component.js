@@ -10,7 +10,9 @@ import {
     Dimensions,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 const { height, width } = Dimensions.get('window');
+@observer
 export default class Index extends Component {
     constructor(props) {
         super(props)

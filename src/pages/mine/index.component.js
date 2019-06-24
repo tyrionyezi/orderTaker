@@ -19,6 +19,7 @@ import Header from './components/header/index.component';
 import List from './../components/list/index.component';
 import { listData } from './index.data';
 import _state from './index.state';
+import { toJS } from 'mobx';
 @observer
 export default class Index extends Component {
     constructor(props) {
@@ -37,7 +38,7 @@ export default class Index extends Component {
         let { userInfo } = _state;
         return (
             <View style={_style.container}>
-                <Header {...this.props} />
+                <Header {...this.props} data={toJS(_state.headInfo)} />
                 <TouchableOpacity
                     activeOpacity={0.5}
                     style={_style.userInfoBox}

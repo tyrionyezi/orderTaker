@@ -194,7 +194,7 @@ class State {
 
         http.post(url, params).then((res) => {
             if (res.status == 'success') {
-                NavigationService.back();
+                NavigationService.pop();
                 this.rootInfo.refresh();
                 Toast.success("订单完成", 2, () => { }, true);
             } else {

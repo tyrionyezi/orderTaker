@@ -25,7 +25,7 @@ class State {
 
     back = () => {
         this.rootInfo.refresh();
-        NavigationService.back();
+        NavigationService.pop();
     }
 
     reqParams = {
@@ -131,7 +131,7 @@ class State {
         }
 
         if (result.status === 'success') {
-            NavigationService.back();
+            NavigationService.pop();
             this.rootInfo.refresh();
             Toast.success("修改成功", 2, () => { }, true);
         } else {

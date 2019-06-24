@@ -34,6 +34,7 @@ export default class Header extends Component {
 
 
     render() {
+        let { data = {} } = this.props
         return (
             <View style={_style.headerBox}>
                 <TouchableOpacity
@@ -47,7 +48,7 @@ export default class Header extends Component {
                     onPress={this.getMoney.bind(this, { title: '本金提现' })}
                 >
                     <Image style={{ height: 25, width: 25 }} source={require('./../../../../asset/purse.png')} />
-                    <Text style={_style.tilteTxt}>{`本金：${0}`}</Text>
+                    <Text style={_style.tilteTxt}>{`本金：${data.balance}`}</Text>
                 </TouchableOpacity>
             </View>
         )

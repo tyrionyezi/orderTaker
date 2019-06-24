@@ -129,12 +129,12 @@ class State {
         }
 
         http.post(url, params).then((result) => {
-            if (result === 'success') {
-                NavigationService.back();
+            if (result.status === 'success') {
+                NavigationService.pop();
                 this.rootInfo.refresh();
-                Toast.success("添加成功", 1, () => { }, true);
+                Toast.info(result.msg, 1, () => { }, true);
             } else {
-                Toast.info(`添加失败，${result}`, 2, () => { }, true);
+                Toast.info(result.msg, 2, () => { }, true);
             }
         });
     };
