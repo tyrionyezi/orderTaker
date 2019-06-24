@@ -6,6 +6,7 @@ import routerStack from "./router/index.js";
 
 const AppContainer = createAppContainer(routerStack);
 
+
 global.storage = asyncStorage;
 global.loginStatus = false,
     getLoginStatus = () => {
