@@ -17,11 +17,12 @@ import {
 import { observer } from 'mobx-react';
 import Header from './components/header/index.component';
 import List from './../components/list/index.component';
+import { exitApp } from './../components/exitApp/index.component';
 import { listData } from './index.data';
 import _state from './index.state';
 import { toJS } from 'mobx';
 @observer
-export default class Index extends Component {
+class Mine extends Component {
     constructor(props) {
         super(props)
     }
@@ -59,7 +60,7 @@ export default class Index extends Component {
         )
     }
 }
-
+export default exitApp(Mine);
 const _style = StyleSheet.create({
     container: {
         backgroundColor: '#dcd8d84d'

@@ -12,10 +12,11 @@ import {
 import { observer } from 'mobx-react';
 const { height, width } = Dimensions.get('window');
 import Card from './../components/card/index.component';
+import { exitApp } from './../components/exitApp/index.component';
 import { card1Data, card2Data } from './index.data';
 
 @observer
-export default class Index extends Component {
+class Order extends Component {
     constructor(props) {
         super(props)
     }
@@ -34,6 +35,8 @@ export default class Index extends Component {
         )
     }
 }
+
+export default exitApp(Order)
 
 const _style = StyleSheet.create({
     container: {

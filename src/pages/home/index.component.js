@@ -18,11 +18,12 @@ import { NoticeBar, Toast, Button } from 'antd-mobile-rn';
 import { observer } from 'mobx-react';
 import Header from './components/header/index.component';
 import CardBox from './components/cardBox/index.component';
-import PermissionAndroidViewComponent from './../components/PermissionAndroidView/index'
+import PermissionAndroidViewComponent from './../components/PermissionAndroidView/index';
+import { exitApp } from './../components/exitApp/index.component';
 import { cardBoxData } from './index.data';
 import _state from './index.state'
 @observer
-export default class Home extends Component {
+class Home extends Component {
     constructor(props) {
         super(props)
     }
@@ -61,7 +62,7 @@ export default class Home extends Component {
         )
     }
 }
-
+export default exitApp(Home);
 const _style = StyleSheet.create({
     main: {
         backgroundColor: '#dcd8d84d'

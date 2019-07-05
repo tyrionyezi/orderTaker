@@ -6,8 +6,8 @@ import {
 } from 'react-native'
 
 
-function ExitApp(WrappedComponent) {
-    return class Home extends Component {
+function exitApp(WrappedComponent) {
+    return class ExitApp extends Component {
         constructor(props) {
             super(props)
         }
@@ -42,12 +42,12 @@ function ExitApp(WrappedComponent) {
 
         render() {
             return (
-                <WrappedComponent />
+                <WrappedComponent {...this.props} />
             )
         }
     }
 }
 
 export {
-    ExitApp
+    exitApp
 }

@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 const { height, width } = Dimensions.get('window');
 import Card from './../components/card/index.component';
+import { exitApp } from './../components/exitApp/index.component';
 import { card1Data, card2Data } from './index.data';
-export default class Index extends Component {
+class Game extends Component {
     constructor(props) {
         super(props)
     }
@@ -31,6 +32,8 @@ export default class Index extends Component {
         )
     }
 }
+
+export default exitApp(Game)
 
 const _style = StyleSheet.create({
     container: {
