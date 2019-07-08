@@ -8,6 +8,7 @@ class State {
 
     @observable tel = '';
     @observable password = '';
+    @observable password1 = '';
     @observable name = '';
     @observable email = '';
 
@@ -18,6 +19,10 @@ class State {
 
     pwdChange = (value) => {
         this.password = value;
+    }
+
+    pwdChange1 = (value) => {
+        this.password1 = value;
     }
 
     nameChange = (value) => {
@@ -32,6 +37,10 @@ class State {
      */
     register = async () => {
         let url = 'register';
+        if (this.password !== this.password1) {
+            Toast.info("两次密码不相同", 2, () => { }, true);
+            return
+        }
         let params = {
             tel: this.tel,
             password: this.password,
@@ -42,13 +51,12 @@ class State {
         params.password = params.password.trim();
         params.name = params.name.trim();
         params.email = params.email.trim();
-        console.log(params, 'p')
         if (params.tel === '') {
-            Toast.fail("手机号不能为空", 2, () => { }, true);
+            Toast.info("手机号不能为空", 2, () => { }, true);
             return
         }
         if (params.name === '') {
-            Toast.fail("账户名不能为空", 2, () => { }, true);
+            Toast.info("账户名不能为空", 2, () => { }, true);
             return
         }
         if (params.password === '') {

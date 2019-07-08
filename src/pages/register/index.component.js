@@ -24,7 +24,8 @@ export default class Index extends Component {
     }
     state = {
         tel: false,
-        password: false
+        password: false,
+        password1: false,
     }
 
     telOnFocus = () => {
@@ -33,6 +34,10 @@ export default class Index extends Component {
 
     passwordOnFocus = () => {
         this.setState({ password: !this.state.password })
+    }
+
+    passwordOnFocus1 = () => {
+        this.setState({ password1: !this.state.password1 })
     }
 
     nameOnFocus = () => {
@@ -114,21 +119,21 @@ export default class Index extends Component {
                                 onChangeText={_state.pwdChange}
                             />
                         </View>
-                        {/* <View style={_style.layout}>
-                        <Text style={_style.titleTxt}>确认密码</Text>
-                        <TextInput
-                            autoCapitalize={'none'}
-                            placeholder='请再次输入密码'
-                            keyboardType={'default'}
-                            secureTextEntry={true}
-                            autoComplete={'password'}
-                            style={[_style.textInput, this.state.password ? _style.onFoucs : {}]}
-                            value={_state.password}
-                            onFocus={this.passwordOnFocus}
-                            onBlur={this.passwordOnFocus}
-                            onChangeText={_state.pwdChange}
-                        />
-                    </View> */}
+                        <View style={_style.layout}>
+                            <Text style={_style.titleTxt}>确认密码</Text>
+                            <TextInput
+                                autoCapitalize={'none'}
+                                placeholder='请再次输入密码'
+                                keyboardType={'default'}
+                                secureTextEntry={true}
+                                autoComplete={'password1'}
+                                style={[_style.textInput, this.state.password1 ? _style.onFoucs : {}]}
+                                value={_state.password1}
+                                onFocus={this.passwordOnFocus1}
+                                onBlur={this.passwordOnFocus1}
+                                onChangeText={_state.pwdChange1}
+                            />
+                        </View>
                         <View style={_style.btnBox}>
                             <Btn txt={'注册'} onClick={this.doRegister} />
                         </View>

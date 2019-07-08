@@ -67,6 +67,7 @@ export default class Index extends Component {
                                     width={300}
                                     height={180}
                                     borderRadius={10}
+                                    options={{ chooseFromLibraryButtonTitle: null }}
                                     type='1'
                                     onClick={_state.getIdCardFrontPic}
                                 />
@@ -80,6 +81,7 @@ export default class Index extends Component {
                                     width={300}
                                     height={180}
                                     borderRadius={10}
+                                    options={{ chooseFromLibraryButtonTitle: null }}
                                     type='1'
                                     onClick={_state.getIdCardBackPic}
                                 />

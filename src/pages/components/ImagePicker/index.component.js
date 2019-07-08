@@ -47,8 +47,10 @@ export default class App extends Component {
             noData: false,
             storageOptions: {
                 skipBackup: true
-            }
+            },
+            ...this.props.options
         };
+
 
         ImagePicker.showImagePicker(options, (response) => {
             console.log('Response = ', response);
