@@ -77,7 +77,7 @@ export default Routes = {
     confirmBrowseOrder: {
         screen: ConfirmBrowseOrder, //浏览任务详情
         navigationOptions: ({ navigation }) => ({
-            title: '确认任务',
+            title: '浏览任务详情',
         }),
     },
     confirmAdvancePaymentOrder: {

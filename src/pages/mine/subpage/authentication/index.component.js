@@ -72,7 +72,7 @@ export default class Index extends Component {
                                     onClick={_state.getIdCardFrontPic}
                                 />
                                 :
-                                <Image style={{ width: 300, height: 180 }} source={{ uri: 'data:image/jpeg;base64,' + toJS(_state.pic_front) }} />
+                                <Image style={{ width: 300, height: 180, borderRadius: 10, marginBottom: 20 }} source={{ uri: 'data:image/jpeg;base64,' + toJS(_state.pic_front) }} />
                         }
 
                         {

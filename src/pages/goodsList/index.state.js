@@ -1,6 +1,7 @@
 import { observable, action, toJS } from 'mobx';
 import { Toast } from 'antd-mobile-rn';
 import http from './../../config/fetch';
+import NavigationService from './../../config/NavigationService'
 import moment from 'moment';
 
 class State {
@@ -141,17 +142,35 @@ class State {
                 id: res.id,
             }
             if (params.id === '') {
-                Toast.fail("请登录", 2, () => { }, true);
+                Toast.info("请登录", 2, () => { }, true);
                 return
             }
             if (!params.buyer) {
-                Toast.fail("请添加的买手信息", 2, () => { }, true);
+                Toast.info("请添加的买手信息", 2, () => { }, true);
                 return
             }
             http.post(url, params).then((res) => {
                 if (res.status === 'sucess') {
-                    Toast.success("接单成功", 2, () => { }, true);
+                    Toast.info("接单成功", 2, () => { }, true);
                     this.getTaskList();
+                    if (this.rootInfo.wrap_type === 1) {
+                        NavigationService.navigate('confirmBrowseOrder', {
+                            data: {
+                                title: '未完成',
+                                serial: item.serial,
+                            },
+                            refresh: this.getTaskList
+                        })
+                    } else {
+                        NavigationService.navigate('confirmAdvancePaymentOrder', {
+                            data: {
+                                title: '未完成',
+                                serial: item.serial,
+                            },
+                            refresh: this.getTaskList
+                        })
+                    }
+
                 } else {
                     Toast.info(res.msg, 2, () => { }, true);
                 }

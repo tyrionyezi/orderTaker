@@ -60,7 +60,11 @@ class State {
             return
         }
         if (params.password === '') {
-            Toast.fail("密码不能为空", 2, () => { }, true);
+            Toast.info("密码不能为空", 2, () => { }, true);
+            return
+        }
+        if (params.email === '') {
+            Toast.info("密码不能为空", 2, () => { }, true);
             return
         }
         let result = await http.post(url, params);
