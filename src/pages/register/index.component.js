@@ -126,7 +126,7 @@ export default class Index extends Component {
                                 placeholder='请再次输入密码'
                                 keyboardType={'default'}
                                 secureTextEntry={true}
-                                autoComplete={'password1'}
+                                autoComplete={'password'}
                                 style={[_style.textInput, this.state.password1 ? _style.onFoucs : {}]}
                                 value={_state.password1}
                                 onFocus={this.passwordOnFocus1}
